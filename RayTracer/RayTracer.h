@@ -3,6 +3,9 @@
 #include "Ray.h"
 #include <iostream>
 #include <fstream>
+#include "Surface.h"
+#include <vector>
+#include "Sphere.h"
 
 class RayTracer {
 private:
@@ -10,6 +13,7 @@ private:
 	int imageHeight;
 	int focalLength;
 	glm::vec3 eye;
+	std::vector<Sphere> objects;
 public:
 	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
 	bool Render();

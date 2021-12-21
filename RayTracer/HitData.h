@@ -1,5 +1,5 @@
 #pragma once
 struct HitData {
 	bool IsHit;
-	float T;
+	double T;
 };

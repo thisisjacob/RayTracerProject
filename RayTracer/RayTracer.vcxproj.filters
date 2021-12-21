@@ -19,6 +19,9 @@
     <Filter Include="Misc">
       <UniqueIdentifier>{a651c60f-e971-48fb-9813-a2519767cb8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Surfaces\Geometric">
+      <UniqueIdentifier>{fcd23cbf-8628-4e3c-89e3-8ad8e3415a45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Surfaces\Geometric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="MathFunctions.h">
       <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Surfaces\Geometric</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

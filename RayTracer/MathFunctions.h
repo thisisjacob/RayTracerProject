@@ -1,3 +1,5 @@
+#pragma once
+
 template <typename T>
 T Clamp(T val, T min, T max) {
 	static_assert(std::is_arithmetic<T>::value());
