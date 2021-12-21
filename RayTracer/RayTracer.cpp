@@ -20,8 +20,9 @@ bool RayTracer::Render() {
 	fileWriter << "P3\n";
 	fileWriter << imageWidth << " " << imageHeight << "\n";
 	fileWriter << "255\n";
-	for (int v = 0; v < imageHeight; v++) {
-		for (int u = 0; u < imageWidth; u++) {
+
+	for (int v = -(imageHeight / 2); v < imageHeight / 2; v++) {
+		for (int u = -(imageWidth / 2); u < imageWidth / 2; u++) {
 			Ray ray = Ray(eye, focalLength, u, v);
 			HitData hitData;
 			hitData.IsHit = false;
