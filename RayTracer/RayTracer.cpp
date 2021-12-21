@@ -5,8 +5,8 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
-	eye = glm::vec3(w, u, v);
-	Sphere sphere(0.0, 0.0, 0.0, 1.0);
+	eye = glm::vec3(u, v, w);
+	Sphere sphere(0.0, 0.0, 0.0, 3.0);
 	objects.push_back(sphere);
 }
 
