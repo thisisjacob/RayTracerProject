@@ -1,6 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "Ray.h"
+#include <iostream>
+#include <fstream>
 
 class RayTracer {
 private:
@@ -9,6 +11,6 @@ private:
 	int focalLength;
 	glm::vec3 eye;
 public:
-	RayTracer(int imageWidth, int imageHeight, int u, int v, int focalLength);
+	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
 	bool Render();
 };

@@ -16,6 +16,9 @@
     <Filter Include="Surfaces">
       <UniqueIdentifier>{342e3627-ca82-4a4b-a1c5-ca4a75548aeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{a651c60f-e971-48fb-9813-a2519767cb8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="HitData.h">
       <Filter>Surfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
+      <Filter>Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
