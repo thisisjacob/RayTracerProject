@@ -6,8 +6,7 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	eye = glm::vec3(u, v, w);
-	Sphere sphere(0.0, 0.0, 0.0, 3.0);
-	objects.push_back(sphere);
+	objects.push_back(std::unique_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 3.0)));
 }
 
 bool RayTracer::Render() {
@@ -27,8 +26,8 @@ bool RayTracer::Render() {
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();
-			for (Sphere s : objects)
-				s.IsHit(ray, 0, hitData.T, hitData);
+			for (const auto& s : objects)
+				(*s).IsHit(ray, 0, hitData.T, hitData);
 			// Test to check for hitting
 			if (hitData.IsHit)
 				fileWriter << 255 << " 0 0\n";
