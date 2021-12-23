@@ -1,7 +1,7 @@
 #pragma once
 #include "Sphere.h"
 
-Sphere::Sphere(float w, float u, float v, float r, Material* mat) {
+Sphere::Sphere(float u, float v, float w, float r, Material* mat) {
 	center = glm::vec3(u, v, w);
 	this->r = r;
 	this->mat = std::shared_ptr<Material>(mat);
@@ -17,10 +17,10 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	double discriminant = B * B - 4.0 * A * C;
 	if (discriminant < 0) return false;
 
-	double addT = (-B + sqrt(discriminant)) / (2 * A);
-	double minusT = (-B - sqrt(discriminant)) / (2 * A);
+	double addT = (-B + sqrt(discriminant)) / (2.0 * A);
+	double minusT = (-B - sqrt(discriminant)) / (2.0 * A);
 
-	// MinusT is always the smaller T, socheck it first
+	// MinusT is always the smaller T, so check it first
 	if (minusT > t0 && minusT < t1) {
 		record.T = minusT;
 		record.IsHit = true;

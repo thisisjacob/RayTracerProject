@@ -1,6 +1,6 @@
 #include "RayTracer.h";
 
 int main() {
-	RayTracer ray(1600, 400, 0.0, 0.0, -3.1, 8.0);
+	RayTracer ray(400, 400, 0.0, 0.0, -7.2, 5.0);
 	ray.Render();
 }
