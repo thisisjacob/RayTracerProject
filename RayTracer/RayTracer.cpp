@@ -6,7 +6,7 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::unique_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 3.0)));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 3.0)));
 }
 
 bool RayTracer::Render() {
@@ -26,8 +26,17 @@ bool RayTracer::Render() {
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();
-			for (const auto& s : objects)
-				(*s).IsHit(ray, 0, hitData.T, hitData);
+			std::shared_ptr<Surface> hitObject;
+			for (const auto& s : objects) {
+				bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
+				if (isHit) {
+					hitData.HitSurface = hitObject;
+					hitData.IntersectingRay = ray;
+				}
+			}
+
+			// Found closest object, determine color
+				
 			// Test to check for hitting
 			if (hitData.IsHit)
 				fileWriter << 255 << " 0 0\n";

@@ -13,7 +13,7 @@ private:
 	int imageHeight;
 	int focalLength;
 	glm::vec3 eye;
-	std::vector<std::unique_ptr<Surface>> objects;
+	std::vector<std::shared_ptr<Surface>> objects;
 public:
 	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
 	bool Render();

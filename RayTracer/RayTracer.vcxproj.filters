@@ -56,5 +56,8 @@
     <ClInclude Include="Sphere.h">
       <Filter>Surfaces\Geometric</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Surfaces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
