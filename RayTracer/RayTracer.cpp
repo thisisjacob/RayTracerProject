@@ -1,13 +1,15 @@
 #include "RayTracer.h"
 #include "MathFunctions.h"
-#include "TestMat.h";
+#include "TestMat.h"
+#include "FixedColor.h"
 
 RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength) {
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 3.0, new TestMat())));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 3.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, -4.0, -2.0, 3.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
 }
 
 bool RayTracer::Render() {
@@ -41,7 +43,7 @@ bool RayTracer::Render() {
 			if (hitData.IsHit) {
 				// Found closest object, determine shading
 				glm::vec3 color = hitData.HitSurface->Color(hitData);
-				fileWriter << Normalize(color.x, 1.0, 255) << " " << Normalize(color.y, 1.0, 255) << " " << Normalize(color.z, 1.0, 255) << "\n";
+				fileWriter << 255 * color.x << " " << 255 * color.y << " " << 255 * color.z << "\n";
 			}
 			else // TODO: Change normalize function to prevent negative values
 				fileWriter << Normalize(u, imageWidth, 255) << " " << Normalize(v, imageHeight, 255) << " 128\n";

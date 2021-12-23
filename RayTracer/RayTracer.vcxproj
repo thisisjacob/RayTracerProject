@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FixedColor.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="TestMat.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FixedColor.h" />
     <ClInclude Include="HitData.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
