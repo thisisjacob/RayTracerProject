@@ -1,9 +1,10 @@
 #pragma once
 #include "Sphere.h"
 
-Sphere::Sphere(float w, float u, float v, float r) {
+Sphere::Sphere(float w, float u, float v, float r, Material* mat) {
 	center = glm::vec3(u, v, w);
 	this->r = r;
+	this->mat = std::shared_ptr<Material>(mat);
 }
 
 bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
@@ -32,4 +33,8 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	}
 
 	return false;
+}
+
+glm::vec3 Sphere::Color(HitData& hitData) {
+	return mat.get()->Shading(hitData);
 }

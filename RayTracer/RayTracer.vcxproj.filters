@@ -22,6 +22,9 @@
     <Filter Include="Surfaces\Geometric">
       <UniqueIdentifier>{fcd23cbf-8628-4e3c-89e3-8ad8e3415a45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Surfaces\Materials">
+      <UniqueIdentifier>{9f4109dc-1d15-445f-a611-86e86027dc50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -35,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Surfaces\Geometric</Filter>
+    </ClCompile>
+    <ClCompile Include="TestMat.cpp">
+      <Filter>Surfaces\Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Surfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMat.h">
+      <Filter>Surfaces\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
