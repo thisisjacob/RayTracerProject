@@ -2,6 +2,7 @@
 #include "MathFunctions.h"
 #include "TestMat.h"
 #include "FixedColor.h"
+#include "Lambertian.h"
 
 RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength) {
 	this->imageWidth = imageWidth;
@@ -9,9 +10,9 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->focalLength = focalLength;
 	aspectRatio = (double)imageWidth / (double)imageHeight;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new Lambertian(glm::vec3(0.7, 0.2, 0.2), glm::vec3(0.0, 0.0, -1.4)))));
 	// TODO: V currently moves sphere in opposite order, fix
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(-1.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, 0.0, 1.0, new Lambertian(glm::vec3(0.2, 0.2, 7.0), glm::vec3(0.0, 0.0, -1.4)))));
 }
 
 bool RayTracer::Render() {

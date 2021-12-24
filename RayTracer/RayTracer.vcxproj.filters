@@ -45,6 +45,9 @@
     <ClCompile Include="FixedColor.cpp">
       <Filter>Surfaces\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="Lambertian.cpp">
+      <Filter>Surfaces\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer.h">
@@ -72,6 +75,9 @@
       <Filter>Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="FixedColor.h">
+      <Filter>Surfaces\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Lambertian.h">
       <Filter>Surfaces\Materials</Filter>
     </ClInclude>
   </ItemGroup>
