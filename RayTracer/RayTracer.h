@@ -11,7 +11,7 @@ class RayTracer {
 private:
 	int imageWidth;
 	int imageHeight;
-	int focalLength;
+	double focalLength;
 	glm::vec3 eye;
 	std::vector<std::shared_ptr<Surface>> objects;
 public:

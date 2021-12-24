@@ -10,7 +10,7 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	eye = glm::vec3(u, v, w);
 	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
 	// TODO: V currently moves sphere in opposite order, fix
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(-0.5, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
 }
 
 bool RayTracer::Render() {
