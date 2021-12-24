@@ -28,8 +28,8 @@ bool RayTracer::Render() {
 	// Calculating output data for each pixel of image
 	for (int row = 0; row < imageHeight; row++) {
 		for (int col = 0; col < imageWidth; col++) {
-			// TODO: Use aspect ratio to account for differences in width and height
-			double u = -0.5 + (1.0 / imageWidth) * (double)(col);
+			// Increases range of u to account for aspect ratio (assuming widescreen)
+			double u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (double)(col);
 			double v = 0.5 - (1.0 / imageHeight) * (double)(row);
 			Ray ray = Ray(eye, focalLength, u, v);
 			// Finding closest object hit
