@@ -7,5 +7,5 @@ Ray::Ray() {
 
 Ray::Ray(glm::vec3 origin, double focalLength, double u, double v) {
 	this->origin = glm::vec3(origin);
-	dir = glm::vec3(u, v, focalLength);
+	dir = glm::vec3(u, v, -focalLength);
 }

@@ -10,9 +10,9 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->focalLength = focalLength;
 	aspectRatio = (double)imageWidth / (double)imageHeight;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new Lambertian(glm::vec3(0.7, 0.2, 0.2), glm::vec3(0.0, 0.0, -1.4)))));
-	// TODO: V currently moves sphere in opposite order, fix
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, 0.0, 1.0, new Lambertian(glm::vec3(0.2, 0.2, 7.0), glm::vec3(0.0, 0.0, -1.4)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.7, 0.2, 0.2), glm::vec3(0.0, 0.0, 1.4)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.2, 0.2, 0.7), glm::vec3(0.0, 0.0, 1.4)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.2, 0.7, 0.2), glm::vec3(0.0, 0.0, 1.4)))));
 }
 
 bool RayTracer::Render() {
@@ -49,7 +49,7 @@ bool RayTracer::Render() {
 			if (hitData.IsHit) {
 				// Found closest object, determine shading
 				glm::vec3 color = hitData.HitSurface->Color(hitData);
-				fileWriter << 255 * color.x << " " << 255 * color.y << " " << 255 * color.z << "\n";
+				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
 			else // TODO: Change normalize function to prevent negative values
 				fileWriter << Normalize(u, imageWidth, 255) << " " << Normalize(v, imageHeight, 255) << " 128\n";
