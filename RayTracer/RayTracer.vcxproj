@@ -146,11 +146,13 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Start.cpp" />
     <ClCompile Include="TestMat.cpp" />
+    <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FixedColor.h" />
     <ClInclude Include="HitData.h" />
     <ClInclude Include="Lambertian.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Ray.h" />
@@ -158,6 +160,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TestMat.h" />
+    <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

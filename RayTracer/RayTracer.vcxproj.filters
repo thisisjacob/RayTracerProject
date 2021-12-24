@@ -25,6 +25,9 @@
     <Filter Include="Surfaces\Materials">
       <UniqueIdentifier>{9f4109dc-1d15-445f-a611-86e86027dc50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{55bc119c-1572-42dd-a41b-1a5420a53316}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Lambertian.cpp">
       <Filter>Surfaces\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldState.cpp">
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="Lambertian.h">
       <Filter>Surfaces\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldState.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
