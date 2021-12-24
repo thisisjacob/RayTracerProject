@@ -7,5 +7,5 @@ public:
 	glm::vec3 origin;
 	glm::vec3 dir;
 	Ray();
-	Ray(glm::vec3 origin, int focalLength, int u, int v);
+	Ray(glm::vec3 origin, double focalLength, double u, double v);
 };

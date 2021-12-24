@@ -8,9 +8,9 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 5.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
 	// TODO: V currently moves sphere in opposite order, fix
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(-8.0, 8.0, 0.0, 6.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
 }
 
 bool RayTracer::Render() {
@@ -25,8 +25,8 @@ bool RayTracer::Render() {
 	fileWriter << "255\n";
 
 	// Calculating output data for each pixel of image
-	for (int v = imageHeight / 2; v > -imageHeight / 2; v--) {
-		for (int u = -(imageWidth / 2); u < imageWidth / 2; u++) {
+	for (double v = 0.5; v > -0.5; v -= (1.0 / imageHeight)) {
+		for (double u = -0.5; u < 0.5; u += (1.0 / imageWidth)) {
 			Ray ray = Ray(eye, focalLength, u, v);
 			// Finding closest object hit
 			HitData hitData;
