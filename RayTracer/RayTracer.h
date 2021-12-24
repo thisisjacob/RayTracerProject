@@ -12,6 +12,7 @@ private:
 	int imageWidth;
 	int imageHeight;
 	double focalLength;
+	double aspectRatio;
 	glm::vec3 eye;
 	std::vector<std::shared_ptr<Surface>> objects;
 public:

@@ -7,10 +7,11 @@ RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w,
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
+	aspectRatio = (double)imageWidth / (double)imageHeight;
 	eye = glm::vec3(u, v, w);
 	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.5, 0.2, 0.7)))));
 	// TODO: V currently moves sphere in opposite order, fix
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(-0.5, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
+	objects.push_back(std::shared_ptr<Surface>(new Sphere(-1.0, 0.0, 0.0, 1.0, new FixedColor(glm::vec3(0.2, 0.2, 1.0)))));
 }
 
 bool RayTracer::Render() {
@@ -25,8 +26,11 @@ bool RayTracer::Render() {
 	fileWriter << "255\n";
 
 	// Calculating output data for each pixel of image
-	for (double v = 0.5; v > -0.5; v -= (1.0 / imageHeight)) {
-		for (double u = -0.5; u < 0.5; u += (1.0 / imageWidth)) {
+	for (int row = 0; row < imageHeight; row++) {
+		for (int col = 0; col < imageWidth; col++) {
+			// TODO: Use aspect ratio to account for differences in width and height
+			double u = -0.5 + (1.0 / imageWidth) * (double)(col);
+			double v = 0.5 - (1.0 / imageHeight) * (double)(row);
 			Ray ray = Ray(eye, focalLength, u, v);
 			// Finding closest object hit
 			HitData hitData;
@@ -39,7 +43,7 @@ bool RayTracer::Render() {
 					hitData.IntersectingRay = ray;
 				}
 			}
-			
+
 			// Writing color data to file
 			if (hitData.IsHit) {
 				// Found closest object, determine shading
