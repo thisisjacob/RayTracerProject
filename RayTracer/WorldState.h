@@ -11,7 +11,7 @@ private:
 public:
 	WorldState();
 	bool AddSurface(Surface* surface);
-	bool AddLight(Light light);
+	bool AddLight(Light* light);
 	std::vector<std::shared_ptr<Surface>> GetSurfaces();
 	std::vector<std::shared_ptr<Light>> GetLights();
 };

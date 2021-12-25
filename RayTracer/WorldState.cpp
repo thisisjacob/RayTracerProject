@@ -8,8 +8,8 @@ bool WorldState::AddSurface(Surface* surface) {
 	return true;
 }
 
-bool WorldState::AddLight(Light light) {
-	lights.push_back(std::shared_ptr<Light>(&light));
+bool WorldState::AddLight(Light* light) {
+	lights.push_back(std::shared_ptr<Light>(light));
 	return true;
 }
 
