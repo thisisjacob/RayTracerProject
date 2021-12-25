@@ -1,8 +1,8 @@
 #pragma once
-#include "Material.h"
 #include "Light.h";
 #include "Surface.h";
 #include <vector>
+
 
 class WorldState {
 private:
