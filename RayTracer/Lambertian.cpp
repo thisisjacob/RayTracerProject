@@ -1,4 +1,5 @@
 #include "Lambertian.h"
+#include "MathFunctions.h"
 
 Lambertian::Lambertian(glm::vec3 diffuseCoeff) {
 	this->diffuseCoeff = glm::vec3(diffuseCoeff);
@@ -15,7 +16,7 @@ glm::vec3 Lambertian::Shading(HitData& hitData, WorldState& world) {
 	if (lightCalc > 0.0) {
 
 	}
-	return glm::vec3(diffuseCoeff.x * lightCalc, diffuseCoeff.y * lightCalc, diffuseCoeff.z * lightCalc);
+	return glm::vec3(Clamp(diffuseCoeff.x * lightCalc, 0.0, 1.0), Clamp(diffuseCoeff.y * lightCalc, 0.0, 1.0), Clamp(diffuseCoeff.z * lightCalc, 0.0, 1.0));
 }
 
 

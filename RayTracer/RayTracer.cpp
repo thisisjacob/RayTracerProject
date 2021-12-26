@@ -1,5 +1,4 @@
 #include "RayTracer.h"
-#include "MathFunctions.h"
 #include "TestMat.h"
 #include "FixedColor.h"
 #include "Lambertian.h"
@@ -50,7 +49,7 @@ bool RayTracer::Render() {
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
 			else // TODO: Change normalize function to prevent negative values
-				fileWriter << Normalize(u, imageWidth, 255) << " " << Normalize(v, imageHeight, 255) << " 128\n";
+				fileWriter << (int)(255 * abs(u)) << " " << (int)(255 * abs(v)) << " 128\n";
 		}
 	}
 	fileWriter.close();
