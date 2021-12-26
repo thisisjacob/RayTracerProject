@@ -1,18 +1,18 @@
 #pragma once
 #include "Sphere.h"
 
-Sphere::Sphere(float u, float v, float w, float r, Material* mat) {
-	center = glm::vec3(u, v, w);
+Sphere::Sphere(double u, double v, double w, double r, Material* mat) {
+	center = glm::tvec3<double>(u, v, w);
 	this->r = r;
 	this->mat = std::shared_ptr<Material>(mat);
 }
 
-bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
-	glm::vec3 eMinusc = ray.origin - center;
+bool Sphere::IsHit(Ray ray, double t0, double t1, HitData& record) {
+	glm::tvec3<double> eMinusc = ray.origin - center;
 
 	// Use quadratic formula to test discriminant for intersections
 	double A = glm::dot(ray.dir, ray.dir);
-	double B = 2.0 * ((double)glm::dot(ray.dir, eMinusc));
+	double B = 2.0 * glm::dot(ray.dir, eMinusc);
 	double C = glm::dot(eMinusc, eMinusc) - (r * r);
 	double discriminant = B * B - 4.0 * A * C;
 	if (discriminant < 0) return false;
@@ -35,19 +35,19 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	return false;
 }
 
-glm::vec3 Sphere::Color(HitData& hitData, WorldState& world) {
+glm::tvec3<double> Sphere::Color(HitData& hitData, WorldState& world) {
 	return mat.get()->Shading(hitData, world);
 }
 
-glm::vec3 Sphere::GetIntersectionPoint(HitData& hitData) {
-	glm::vec3 p = glm::vec3(hitData.IntersectingRay.dir);
+glm::tvec3<double> Sphere::GetIntersectionPoint(HitData& hitData) {
+	glm::tvec3<double> p = glm::tvec3<double>(hitData.IntersectingRay.dir);
 	p *= hitData.T;
 	p += hitData.IntersectingRay.origin;
 	return p;
 }
 
-glm::vec3 Sphere::GetSurfaceNormal(HitData& hitData) {
-	glm::vec3 p = GetIntersectionPoint(hitData) - center;
+glm::tvec3<double> Sphere::GetSurfaceNormal(HitData& hitData) {
+	glm::tvec3<double> p = GetIntersectionPoint(hitData) - center;
 	p /= p.length();
 	return p;
 }

@@ -14,9 +14,9 @@ private:
 	int imageHeight;
 	double focalLength;
 	double aspectRatio;
-	glm::vec3 eye;
+	glm::tvec3<double> eye;
 	WorldState world;
 public:
-	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength, WorldState world);
+	RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world);
 	bool Render();
 };

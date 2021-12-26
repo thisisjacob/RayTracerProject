@@ -4,8 +4,8 @@
 
 class Ray {
 public:
-	glm::vec3 origin;
-	glm::vec3 dir;
+	glm::tvec3<double> origin;
+	glm::tvec3<double> dir;
 	Ray();
-	Ray(glm::vec3 origin, double focalLength, double u, double v);
+	Ray(glm::tvec3<double> origin, double focalLength, double u, double v);
 };
