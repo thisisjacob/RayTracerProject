@@ -54,6 +54,9 @@
     <ClCompile Include="WorldState.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer.h">
@@ -90,6 +93,9 @@
       <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>

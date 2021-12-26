@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FixedColor.cpp" />
     <ClCompile Include="Lambertian.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="FixedColor.h" />
     <ClInclude Include="HitData.h" />
     <ClInclude Include="Lambertian.h" />
