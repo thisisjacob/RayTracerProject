@@ -6,5 +6,5 @@
 
 class Material {
 public:
-	virtual glm::vec3 Shading(HitData& hitData, WorldState& world) = 0;
+	virtual glm::tvec3<double> Shading(HitData& hitData, WorldState& world) = 0;
 };

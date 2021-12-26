@@ -3,12 +3,12 @@
 #include "FixedColor.h"
 #include "Lambertian.h"
 
-RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength, WorldState world) {
+RayTracer::RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world) {
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	aspectRatio = (double)imageWidth / (double)imageHeight;
-	eye = glm::vec3(u, v, w);
+	eye = glm::tvec3<double>(u, v, w);
 	this->world = world;
 }
 
@@ -45,7 +45,7 @@ bool RayTracer::Render() {
 			// Writing color data to file
 			if (hitData.IsHit) {
 				// Found closest object, determine shading
-				glm::vec3 color = hitData.HitSurface->Color(hitData, world);
+				glm::tvec3<double> color = hitData.HitSurface->Color(hitData, world);
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
 			else // TODO: Change normalize function to prevent negative values

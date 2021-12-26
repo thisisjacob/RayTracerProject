@@ -3,8 +3,8 @@
 
 class FixedColor : public Material {
 private:
-	glm::vec3 color;
+	glm::tvec3<double> color;
 public:
-	glm::vec3 Shading(HitData& hitData, WorldState& world);
-	FixedColor(glm::vec3 fixedColor);
+	glm::tvec3<double> Shading(HitData& hitData, WorldState& world);
+	FixedColor(glm::tvec3<double> fixedColor);
 };

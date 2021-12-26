@@ -4,8 +4,8 @@
 
 class Lambertian : public Material {
 private:
-	glm::vec3 diffuseCoeff;
+	glm::tvec3<double> diffuseCoeff;
 public:
-	Lambertian(glm::vec3 diffuseCoeff);
-	glm::vec3 Shading(HitData& hitData, WorldState& world);
+	Lambertian(glm::tvec3<double> diffuseCoeff);
+	glm::tvec3<double> Shading(HitData& hitData, WorldState& world);
 };

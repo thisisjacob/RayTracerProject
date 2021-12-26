@@ -5,13 +5,13 @@
 
 class Sphere : public Surface {
 private:
-	float r;
-	glm::vec3 center;
+	double r;
+	glm::tvec3<double> center;
 	std::shared_ptr<Material> mat;
 public:
-	Sphere(float u, float v, float w, float r, Material* mat);
-	bool IsHit(Ray ray, float t0, float t1, HitData& record);
-	glm::vec3 Color(HitData& hitData, WorldState& world);
-	glm::vec3 GetSurfaceNormal(HitData& hitData);
-	glm::vec3 GetIntersectionPoint(HitData& hitData);
+	Sphere(double u, double v, double w, double r, Material* mat);
+	bool IsHit(Ray ray, double t0, double t1, HitData& record);
+	glm::tvec3<double> Color(HitData& hitData, WorldState& world);
+	glm::tvec3<double> GetSurfaceNormal(HitData& hitData);
+	glm::tvec3<double> GetIntersectionPoint(HitData& hitData);
 };
