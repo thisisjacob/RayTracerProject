@@ -3,5 +3,5 @@
 
 class TestMat : public Material {
 public:
-	glm::vec3 Shading(HitData& hitData);
+	glm::vec3 Shading(HitData& hitData, WorldState& world);
 };

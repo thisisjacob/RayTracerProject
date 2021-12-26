@@ -35,8 +35,8 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	return false;
 }
 
-glm::vec3 Sphere::Color(HitData& hitData) {
-	return mat.get()->Shading(hitData);
+glm::vec3 Sphere::Color(HitData& hitData, WorldState& world) {
+	return mat.get()->Shading(hitData, world);
 }
 
 glm::vec3 Sphere::GetIntersectionPoint(HitData& hitData) {

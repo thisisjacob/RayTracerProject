@@ -5,6 +5,6 @@ class FixedColor : public Material {
 private:
 	glm::vec3 color;
 public:
-	glm::vec3 Shading(HitData& hitData);
+	glm::vec3 Shading(HitData& hitData, WorldState& world);
 	FixedColor(glm::vec3 fixedColor);
 };

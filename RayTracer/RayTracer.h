@@ -6,6 +6,7 @@
 #include "Surface.h"
 #include <vector>
 #include "Sphere.h"
+#include "WorldState.h"
 
 class RayTracer {
 private:
@@ -14,8 +15,8 @@ private:
 	double focalLength;
 	double aspectRatio;
 	glm::vec3 eye;
-	std::vector<std::shared_ptr<Surface>> objects;
+	WorldState world;
 public:
-	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
+	RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength, WorldState world);
 	bool Render();
 };

@@ -1,18 +1,15 @@
 #include "RayTracer.h"
-#include "MathFunctions.h"
 #include "TestMat.h"
 #include "FixedColor.h"
 #include "Lambertian.h"
 
-RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength) {
+RayTracer::RayTracer(int imageWidth, int imageHeight, float u, float v, float w, float focalLength, WorldState world) {
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
 	aspectRatio = (double)imageWidth / (double)imageHeight;
 	eye = glm::vec3(u, v, w);
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.7, 0.2, 0.2), glm::vec3(0.0, 0.0, 1.4)))));
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.2, 0.2, 0.7), glm::vec3(0.0, 0.0, 1.4)))));
-	objects.push_back(std::shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, new Lambertian(glm::vec3(0.2, 0.7, 0.2), glm::vec3(0.0, 0.0, 1.4)))));
+	this->world = world;
 }
 
 bool RayTracer::Render() {
@@ -37,7 +34,7 @@ bool RayTracer::Render() {
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();
-			for (const auto& s : objects) {
+			for (const auto& s : world.GetSurfaces()) {
 				bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
 				if (isHit) {
 					hitData.HitSurface = s;
@@ -48,11 +45,11 @@ bool RayTracer::Render() {
 			// Writing color data to file
 			if (hitData.IsHit) {
 				// Found closest object, determine shading
-				glm::vec3 color = hitData.HitSurface->Color(hitData);
+				glm::vec3 color = hitData.HitSurface->Color(hitData, world);
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
 			else // TODO: Change normalize function to prevent negative values
-				fileWriter << Normalize(u, imageWidth, 255) << " " << Normalize(v, imageHeight, 255) << " 128\n";
+				fileWriter << (int)(255 * abs(u)) << " " << (int)(255 * abs(v)) << " 128\n";
 		}
 	}
 	fileWriter.close();
