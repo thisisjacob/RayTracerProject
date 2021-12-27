@@ -3,8 +3,7 @@
 #include "FixedColor.h"
 #include "Lambertian.h"
 
-RayTracer::RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world) {
-	camera = Camera(imageWidth, imageHeight, u, v, w, focalLength);
+RayTracer::RayTracer(WorldState world) {
 	this->world = world;
 }
 
@@ -15,14 +14,14 @@ bool RayTracer::Render() {
 		return false;
 	}
 	// Image header
+	const Camera camera = world.GetCamera();
 	fileWriter << "P3\n";
 	fileWriter << camera.GetImageWidth() << " " << camera.GetImageHeight() << "\n";
 	fileWriter << "255\n";
 	// Generate image
-	const double focalLength = camera.GetFocalLength();
 	for (auto v : camera.GenerateVComponents()) {
 		for (auto u : camera.GenerateUComponents()) {
-			Ray ray = Ray(camera.GetEye(), focalLength, u, v);
+			Ray ray = Ray(camera.GetEye(), camera.GetFocalLength(), u, v);
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();

@@ -11,9 +11,8 @@
 
 class RayTracer {
 private:
-	Camera camera;
 	WorldState world;
 public:
-	RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world);
+	RayTracer(WorldState world);
 	bool Render();
 };

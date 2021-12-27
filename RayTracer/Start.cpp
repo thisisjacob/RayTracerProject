@@ -11,7 +11,9 @@ int main() {
 	std::shared_ptr<Light> newLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(2.0, 0.0, 1.0), 2.0 });
 	world.AddLight(light);
 	world.AddLight(newLight);
-	RayTracer ray(800, 400, 0.0, 0.0, 5.0, 1.0, world);
+	Camera camera = Camera(800, 400, 0.0, 0.0, 5.0, 1.0);
+	world.SetCamera(camera);
+	RayTracer ray(world);
 	ray.Render();
 
 	return 0;

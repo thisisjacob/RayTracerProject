@@ -16,7 +16,7 @@ Camera::Camera(int imageWidth, int imageHeight, double u, double v, double w, do
 	eye = glm::tvec3<double>(u, v, w);
 }
 
-std::vector<double> Camera::GenerateUComponents() {
+std::vector<double> Camera::GenerateUComponents() const {
 	std::vector<double> components;
 	for (int col = 0; col < imageWidth; col++) {
 		double u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (double)(col);
@@ -25,7 +25,7 @@ std::vector<double> Camera::GenerateUComponents() {
 	return components;
 }
 
-std::vector<double> Camera::GenerateVComponents() {
+std::vector<double> Camera::GenerateVComponents() const {
 	std::vector<double> components;
 	for (int row = 0; row < imageHeight; row++) {
 		double v = 0.5 - (1.0 / imageHeight) * (double)(row);
@@ -34,23 +34,23 @@ std::vector<double> Camera::GenerateVComponents() {
 	return components;
 }
 
-const glm::tvec3<double> Camera::GetEye() {
+const glm::tvec3<double> Camera::GetEye() const {
 	return eye;
 }
 
-int Camera::GetImageWidth() {
+int  Camera::GetImageWidth() const {
 	return imageWidth;
 }
 
-int Camera::GetImageHeight() {
+int  Camera::GetImageHeight() const {
 	return imageHeight;
 }
 
-double Camera::GetFocalLength() {
+double Camera::GetFocalLength() const {
 	return focalLength;
 }
 
-double Camera::GetAspectRatio() {
+double Camera::GetAspectRatio() const {
 	return aspectRatio;
 }
 
