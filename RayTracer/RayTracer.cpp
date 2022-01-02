@@ -3,12 +3,7 @@
 #include "FixedColor.h"
 #include "Lambertian.h"
 
-RayTracer::RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world) {
-	this->imageWidth = imageWidth;
-	this->imageHeight = imageHeight;
-	this->focalLength = focalLength;
-	aspectRatio = (double)imageWidth / (double)imageHeight;
-	eye = glm::tvec3<double>(u, v, w);
+RayTracer::RayTracer(WorldState world) {
 	this->world = world;
 }
 
@@ -19,18 +14,14 @@ bool RayTracer::Render() {
 		return false;
 	}
 	// Image header
+	const Camera camera = world.GetCamera();
 	fileWriter << "P3\n";
-	fileWriter << imageWidth << " " << imageHeight << "\n";
+	fileWriter << camera.GetImageWidth() << " " << camera.GetImageHeight() << "\n";
 	fileWriter << "255\n";
-
-	// Calculating output data for each pixel of image
-	for (int row = 0; row < imageHeight; row++) {
-		for (int col = 0; col < imageWidth; col++) {
-			// Increases range of u to account for aspect ratio (assuming widescreen)
-			double u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (double)(col);
-			double v = 0.5 - (1.0 / imageHeight) * (double)(row);
-			Ray ray = Ray(eye, focalLength, u, v);
-			// Finding closest object hit
+	// Generate image
+	for (auto v : camera.GenerateVComponents()) {
+		for (auto u : camera.GenerateUComponents()) {
+			Ray ray = Ray(camera.GetEye(), camera.GetFocalLength(), u, v);
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();
@@ -48,7 +39,7 @@ bool RayTracer::Render() {
 				glm::tvec3<double> color = hitData.HitSurface->Color(hitData, world);
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
-			else // TODO: Change normalize function to prevent negative values
+			else
 				fileWriter << (int)(255 * abs(u)) << " " << (int)(255 * abs(v)) << " 128\n";
 		}
 	}

@@ -7,16 +7,12 @@
 #include <vector>
 #include "Sphere.h"
 #include "WorldState.h"
+#include "Camera.h"
 
 class RayTracer {
 private:
-	int imageWidth;
-	int imageHeight;
-	double focalLength;
-	double aspectRatio;
-	glm::tvec3<double> eye;
 	WorldState world;
 public:
-	RayTracer(int imageWidth, int imageHeight, double u, double v, double w, double focalLength, WorldState world);
+	RayTracer(WorldState world);
 	bool Render();
 };
