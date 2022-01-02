@@ -53,17 +53,3 @@ double Camera::GetFocalLength() const {
 double Camera::GetAspectRatio() const {
 	return aspectRatio;
 }
-
-
-/*
-	Camera(int imageWidth, int imageHeight, double u, double v, double w, double focalLength);
-	// Generates vectors holding each U and V vector in order
-	// This can be used for the main ray tracing loop
-	const std::vector<double> GenerateUComponents();
-	const std::vector<double> GenerateVComponents();
-	const glm::tvec3<double> GetEye();
-	int GetImageWidth();
-	int GetImageHeight();
-	double GetFocalLength();
-	double GetAspectRatio();
-*/
