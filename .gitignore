@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /RayTracer/test.ppm
+/RayTracer/test.jpg
+/RayTracer/test.jpeg
