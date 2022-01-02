@@ -1,6 +1,5 @@
 #include "RayTracer.h";
 #include "WorldState.h"
-#include "Lambertian.h"
 #include "BaseShader.h"
 
 int main() {

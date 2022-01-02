@@ -1,7 +1,4 @@
 #include "RayTracer.h"
-#include "TestMat.h"
-#include "FixedColor.h"
-#include "Lambertian.h"
 
 RayTracer::RayTracer(WorldState world) {
 	this->world = world;

@@ -42,15 +42,6 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Surfaces\Geometric</Filter>
     </ClCompile>
-    <ClCompile Include="TestMat.cpp">
-      <Filter>Surfaces\Materials</Filter>
-    </ClCompile>
-    <ClCompile Include="FixedColor.cpp">
-      <Filter>Surfaces\Materials</Filter>
-    </ClCompile>
-    <ClCompile Include="Lambertian.cpp">
-      <Filter>Surfaces\Materials</Filter>
-    </ClCompile>
     <ClCompile Include="WorldState.cpp">
       <Filter>World</Filter>
     </ClCompile>
@@ -82,15 +73,6 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Surfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="TestMat.h">
-      <Filter>Surfaces\Materials</Filter>
-    </ClInclude>
-    <ClInclude Include="FixedColor.h">
-      <Filter>Surfaces\Materials</Filter>
-    </ClInclude>
-    <ClInclude Include="Lambertian.h">
-      <Filter>Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="WorldState.h">
       <Filter>World</Filter>

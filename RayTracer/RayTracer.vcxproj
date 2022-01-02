@@ -141,21 +141,16 @@
   <ItemGroup>
     <ClCompile Include="BaseShader.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="FixedColor.cpp" />
-    <ClCompile Include="Lambertian.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Start.cpp" />
-    <ClCompile Include="TestMat.cpp" />
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseShader.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="FixedColor.h" />
     <ClInclude Include="HitData.h" />
-    <ClInclude Include="Lambertian.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
@@ -163,7 +158,6 @@
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />
-    <ClInclude Include="TestMat.h" />
     <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
