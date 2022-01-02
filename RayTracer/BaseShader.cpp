@@ -18,7 +18,7 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 		// diffuse calculation
 		lightCalc += light.get()->intensity * diffuseCoeff *  std::max(0.0, glm::dot(unitNormal, lVecUnit));
 	}
-
+	// ambient calculation
 	lightCalc += ambientCoeff * ambientIntensity;
 
 	return glm::tvec3<double>(Clamp(lightCalc.x, 0.0, 1.0), Clamp(lightCalc.y, 0.0, 1.0), Clamp(lightCalc.z, 0.0, 1.0));
