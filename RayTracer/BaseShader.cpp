@@ -14,9 +14,16 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 	glm::tvec3<double> lightCalc = glm::tvec3<double>(0.0);
 	for (auto light : world.GetLights()) {
 		glm::tvec3<double> lVecUnit = light.get()->lightPos - hitData.HitSurface.get()->GetIntersectionPoint(hitData);
-		lVecUnit /= lVecUnit.length();
+		lVecUnit = glm::normalize(lVecUnit);
 		// diffuse calculation
 		lightCalc += light.get()->intensity * diffuseCoeff *  std::max(0.0, glm::dot(unitNormal, lVecUnit));
+		// specular calculation
+		glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - hitData.HitSurface.get()->GetIntersectionPoint(hitData);
+		vVecUnit = glm::normalize(vVecUnit);
+		glm::tvec3<double> h = vVecUnit + lVecUnit;
+		h /= (vVecUnit + lVecUnit).length();
+		h = glm::normalize(h);
+		lightCalc += specularCoeff * light.get()->intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 	}
 	// ambient calculation
 	lightCalc += ambientCoeff * ambientIntensity;
