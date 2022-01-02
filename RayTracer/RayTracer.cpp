@@ -40,7 +40,7 @@ bool RayTracer::Render() {
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
 			else
-				fileWriter << (int)(255 * abs(u)) << " " << (int)(255 * abs(v)) << " 128\n";
+				fileWriter << "53 81 92\n";
 		}
 	}
 	fileWriter.close();

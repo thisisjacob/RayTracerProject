@@ -57,9 +57,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>World</Filter>
     </ClCompile>
-    <ClCompile Include="BlinnPhong.cpp">
-      <Filter>Surfaces\Materials</Filter>
-    </ClCompile>
     <ClCompile Include="BaseShader.cpp">
       <Filter>Surfaces\Materials</Filter>
     </ClCompile>
@@ -103,9 +100,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="BlinnPhong.h">
-      <Filter>Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="BaseShader.h">
       <Filter>Surfaces\Materials</Filter>

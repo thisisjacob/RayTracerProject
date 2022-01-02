@@ -47,7 +47,6 @@ glm::tvec3<double> Sphere::GetIntersectionPoint(HitData& hitData) {
 }
 
 glm::tvec3<double> Sphere::GetSurfaceNormal(HitData& hitData) {
-	glm::tvec3<double> p = GetIntersectionPoint(hitData) - center;
-	p /= p.length();
+	glm::tvec3<double> p = glm::normalize(GetIntersectionPoint(hitData) - center);
 	return p;
 }

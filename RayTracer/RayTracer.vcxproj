@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseShader.cpp" />
-    <ClCompile Include="BlinnPhong.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FixedColor.cpp" />
     <ClCompile Include="Lambertian.cpp" />
@@ -153,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseShader.h" />
-    <ClInclude Include="BlinnPhong.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="FixedColor.h" />
     <ClInclude Include="HitData.h" />
