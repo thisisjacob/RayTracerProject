@@ -4,5 +4,5 @@
 
 struct Light {
 	glm::tvec3<double> lightPos;
-	double intensity;
+	glm::tvec3<double> lightIntensity;
 };
