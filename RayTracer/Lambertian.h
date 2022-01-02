@@ -1,6 +1,5 @@
 #pragma once
 #include "Material.h"
-#include "WorldState.h"
 
 class Lambertian : public Material {
 private:
