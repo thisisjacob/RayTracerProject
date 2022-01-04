@@ -41,8 +41,6 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 			h = glm::normalize(h);
 			lightCalc += specularCoeff * intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 		}
-		//else
-			//lightCalc = glm::vec3(1.0, 1.0, 1.0);
 	}
 
 	return glm::tvec3<double>(Clamp(lightCalc.x, 0.0, 1.0), Clamp(lightCalc.y, 0.0, 1.0), Clamp(lightCalc.z, 0.0, 1.0));
