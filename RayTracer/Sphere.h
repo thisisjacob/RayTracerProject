@@ -13,5 +13,6 @@ public:
 	bool IsHit(Ray ray, double t0, double t1, HitData& record);
 	glm::tvec3<double> Color(HitData& hitData, WorldState& world);
 	glm::tvec3<double> GetSurfaceNormal(HitData& hitData);
+	glm::tvec3<double> GetUnitSurfaceNormal(HitData& hitData);
 	glm::tvec3<double> GetIntersectionPoint(HitData& hitData);
 };

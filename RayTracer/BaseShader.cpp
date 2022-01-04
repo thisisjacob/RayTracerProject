@@ -10,20 +10,23 @@ BlinnPhong::BlinnPhong() {
 }
 
 glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
-	glm::tvec3<double> unitNormal = hitData.HitSurface.get()->GetSurfaceNormal(hitData);
+	glm::tvec3<double> unitNormal = hitData.HitSurface.get()->GetUnitSurfaceNormal(hitData);
+	glm::tvec3<double> intersection = hitData.HitSurface.get()->GetIntersectionPoint(hitData);
 	glm::tvec3<double> lightCalc = glm::tvec3<double>(0.0);
+	// Calculate lighting based on every light source in world
 	for (auto light : world.GetLights()) {
-		glm::tvec3<double> lVecUnit = light.get()->lightPos - hitData.HitSurface.get()->GetIntersectionPoint(hitData);
+		glm::tvec3<double> intensity = light.get()->lightIntensity;
+		glm::tvec3<double> lVecUnit = light.get()->lightPos - intersection;
 		lVecUnit = glm::normalize(lVecUnit);
-		// diffuse calculation
-		lightCalc += light.get()->lightIntensity * diffuseCoeff *  std::max(0.0, glm::dot(unitNormal, lVecUnit));
-		// specular calculation
-		glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - hitData.HitSurface.get()->GetIntersectionPoint(hitData);
+		// Calculate diffuse lighting
+		lightCalc += intensity * diffuseCoeff *  std::max(0.0, glm::dot(unitNormal, lVecUnit));
+		// Calculate specular lighting
+		glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - intersection;
 		vVecUnit = glm::normalize(vVecUnit);
 		glm::tvec3<double> h = vVecUnit + lVecUnit;
 		h /= (vVecUnit + lVecUnit).length();
 		h = glm::normalize(h);
-		lightCalc += specularCoeff * light.get()->lightIntensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
+		lightCalc += specularCoeff * intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 	}
 	// ambient calculation
 	lightCalc += ambientCoeff * ambientIntensity;
@@ -55,23 +58,3 @@ bool BlinnPhong::SetPhongExponent(double exponent) {
 	phongExponent = exponent;
 	return true;
 }
-
-
-/*
-class BlinnPhong : Material {
-private:
-	glm::tvec3<double> ambientCoeff;
-	glm::tvec3<double> ambientIntensity;
-	glm::tvec3<double> diffuseCoeff;
-	glm::tvec3<double> specularCoeff;
-	double phongExponent;
-public:
-	BlinnPhong();
-	glm::tvec3<double> Shading(HitData& hitData, WorldState& world);
-	bool SetAmbientCoeff(glm::tvec3<double> newAmbient);
-	bool SetAmbientIntensity(glm::tvec3<double> newIntensity);
-	bool SetDiffuseCoeff(glm::tvec3<double> diffuseCoeff);
-	bool SetSpecularCoeff(glm::tvec3<double> specularCoeff);
-	bool SetPhongExponent(double exponent);
-};
-*/

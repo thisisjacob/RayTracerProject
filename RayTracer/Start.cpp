@@ -22,9 +22,16 @@ int main() {
 	shader3->SetAmbientIntensity(glm::tvec3<double>(0.2, 0.2, 0.2));
 	shader3->SetSpecularCoeff(glm::tvec3<double>(0.5, 0.5, 0.5));
 	shader3->SetPhongExponent(16.0);
+	BlinnPhong* grassShader = new BlinnPhong();
+	grassShader->SetDiffuseCoeff(glm::tvec3<double>(0.0, 0.1, 0.0));
+	grassShader->SetAmbientCoeff(glm::tvec3<double>(0.1, 0.6, 0.1));
+	grassShader->SetAmbientIntensity(glm::tvec3<double>(0.1, 0.5, 0.1));
+	grassShader->SetSpecularCoeff(glm::tvec3<double>(0.0, 0.0, 0.0));
+	grassShader->SetPhongExponent(1.0);
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
+	world.AddSurface(std::shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, grassShader)));
 	std::shared_ptr<Light> light = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(-1.5, 0.0, 3.2), glm::tvec3<double>(0.5, 0.5, 0.5) });
 	std::shared_ptr<Light> newLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(0.0, -0.8, 0.5), glm::tvec3<double>(0.5, 0.5, 0.5) });
 	world.AddLight(light);

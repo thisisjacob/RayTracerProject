@@ -31,7 +31,6 @@ bool Sphere::IsHit(Ray ray, double t0, double t1, HitData& record) {
 		record.IsHit = true;
 		return true;
 	}
-
 	return false;
 }
 
@@ -46,7 +45,10 @@ glm::tvec3<double> Sphere::GetIntersectionPoint(HitData& hitData) {
 	return p;
 }
 
+glm::tvec3<double> Sphere::GetUnitSurfaceNormal(HitData& hitData) {
+	return glm::normalize(GetSurfaceNormal(hitData));
+}
+
 glm::tvec3<double> Sphere::GetSurfaceNormal(HitData& hitData) {
-	glm::tvec3<double> p = glm::normalize(GetIntersectionPoint(hitData) - center);
-	return p;
+	return GetIntersectionPoint(hitData) - center;
 }

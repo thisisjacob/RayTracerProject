@@ -15,13 +15,14 @@ bool RayTracer::Render() {
 	fileWriter << "P3\n";
 	fileWriter << camera.GetImageWidth() << " " << camera.GetImageHeight() << "\n";
 	fileWriter << "255\n";
-	// Generate image
+	// Generate image by projecting rays
 	for (auto v : camera.GenerateVComponents()) {
 		for (auto u : camera.GenerateUComponents()) {
 			Ray ray = Ray(camera.GetEye(), camera.GetFocalLength(), u, v);
 			HitData hitData;
 			hitData.IsHit = false;
 			hitData.T = std::numeric_limits<double>::infinity();
+			// Find hit surfaces for current ray
 			for (const auto& s : world.GetSurfaces()) {
 				bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
 				if (isHit) {
@@ -32,7 +33,7 @@ bool RayTracer::Render() {
 
 			// Writing color data to file
 			if (hitData.IsHit) {
-				// Found closest object, determine shading
+				// Found closest object, determine shading and send to file
 				glm::tvec3<double> color = hitData.HitSurface->Color(hitData, world);
 				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
 			}
