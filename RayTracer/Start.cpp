@@ -32,13 +32,13 @@ int main() {
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
 	world.AddSurface(std::shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, grassShader)));
-	std::shared_ptr<Light> light = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(-1.5, 0.0, 3.2), glm::tvec3<double>(0.5, 0.5, 0.5) });
-	std::shared_ptr<Light> newLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(-4.0, 2.0, 1.0), glm::tvec3<double>(0.5, 0.5, 0.5) });
-	std::shared_ptr<Light> backLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(0.0, 0.0, -3.0), glm::tvec3<double>(0.5, 0.5, 0.5) });
+	std::shared_ptr<Light> light = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(-1.5, 0.0, 4.2), glm::tvec3<double>(0.4, 0.4, 0.4) });
+	std::shared_ptr<Light> newLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(-4.0, 2.0, 0.5), glm::tvec3<double>(0.4, 0.4, 0.4) });
+	std::shared_ptr<Light> backLight = std::shared_ptr<Light>(new Light{ glm::tvec3<double>(0.0, 0.0, -3.0), glm::tvec3<double>(0.4, 0.4, 0.4) });
 	world.AddLight(light);
 	world.AddLight(newLight);
 	world.AddLight(backLight);
-	Camera camera = Camera(800, 400, -1.0, 0.0, 5.0, 1.0);
+	Camera camera = Camera(800, 400, -1.0, 0.0, 5.5, 1.0);
 	world.SetCamera(camera);
 	RayTracer ray(world);
 	ray.Render();
