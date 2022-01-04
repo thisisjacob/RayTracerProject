@@ -36,7 +36,9 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 			glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - surfacePoint;
 			vVecUnit = glm::normalize(vVecUnit);
 			glm::tvec3<double> h = vVecUnit + lVecUnit;
-			h = glm::normalize(lVecUnit + glm::normalize(-shadowRay.dir));
+			h = vVecUnit + lVecUnit;
+			h /= h.length();
+			h = glm::normalize(h);
 			lightCalc += specularCoeff * intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 		}
 		//else
