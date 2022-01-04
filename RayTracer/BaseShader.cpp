@@ -23,11 +23,10 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 		HitData shadowRecord;
 		shadowRecord.IsHit = false;
 		shadowRecord.T = std::numeric_limits<double>::infinity();
+		Ray shadowRay = Ray(surfacePoint, -lVecUnit.z, lVecUnit.x, lVecUnit.y);
 		// Check for objects blocking light source
 		for (auto surface : world.GetSurfaces()) {
-			Ray shadowRay = Ray(surfacePoint, -lVecUnit.z, lVecUnit.x, lVecUnit.y);
-			surface->IsHit(shadowRay, 0.0000000000001, std::numeric_limits<double>::infinity(), shadowRecord);
-			
+			surface->IsHit(shadowRay, 0.00000000001, shadowRecord.T, shadowRecord);
 		}
 		// If light source is blocked at pixel, do not calculate effect of that light source on the pixel
 		if (!shadowRecord.IsHit) {
@@ -37,10 +36,11 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 			glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - surfacePoint;
 			vVecUnit = glm::normalize(vVecUnit);
 			glm::tvec3<double> h = vVecUnit + lVecUnit;
-			h /= (vVecUnit + lVecUnit).length();
-			h = glm::normalize(h);
+			h = glm::normalize(lVecUnit + glm::normalize(-shadowRay.dir));
 			lightCalc += specularCoeff * intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 		}
+		//else
+			//lightCalc = glm::vec3(1.0, 1.0, 1.0);
 	}
 
 	return glm::tvec3<double>(Clamp(lightCalc.x, 0.0, 1.0), Clamp(lightCalc.y, 0.0, 1.0), Clamp(lightCalc.z, 0.0, 1.0));
