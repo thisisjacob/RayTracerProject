@@ -51,6 +51,9 @@
     <ClCompile Include="BaseShader.cpp">
       <Filter>Surfaces\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Surfaces\Geometric</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="BaseShader.h">
       <Filter>Surfaces\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Surfaces\Geometric</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
