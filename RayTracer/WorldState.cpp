@@ -39,6 +39,9 @@ HitData WorldState::GetIntersection(Ray ray) {
 		bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
 		if (isHit) {
 			hitData.HitSurface = s;
+			if (!hitData.HitSurface) {
+				int i = 0;
+			}
 			hitData.IntersectingRay = ray;
 		}
 	}
