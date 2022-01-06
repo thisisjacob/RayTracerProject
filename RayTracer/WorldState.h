@@ -22,4 +22,5 @@ public:
 	const std::vector<std::shared_ptr<Light>> GetLights();
 	const Camera GetCamera();
 	HitData GetIntersection(Ray ray);
+	HitData GetIntersection(Ray ray, double t0);
 };

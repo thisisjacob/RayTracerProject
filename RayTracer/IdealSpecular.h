@@ -12,6 +12,7 @@ private:
 public:
 	IdealSpecular();
 	glm::tvec3<double> Shading(HitData& hitData, WorldState& world);
+	glm::tvec3<double> RecursiveShading(Ray ray, WorldState& world, int currIter, int maxIter);
 	bool SetAmbientCoeff(glm::tvec3<double> newAmbient);
 	bool SetAmbientIntensity(glm::tvec3<double> newIntensity);
 	bool SetDiffuseCoeff(glm::tvec3<double> newDiffuse);

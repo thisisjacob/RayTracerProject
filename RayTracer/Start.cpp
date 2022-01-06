@@ -1,6 +1,7 @@
 #include "RayTracer.h";
 #include "WorldState.h"
 #include "BaseShader.h"
+#include "IdealSpecular.h"
 
 using std::shared_ptr;
 using std::make_shared;
@@ -33,10 +34,12 @@ int main() {
 	dynamic_pointer_cast<BlinnPhong>(grassShader)->SetAmbientIntensity(glm::tvec3<double>(0.1, 0.5, 0.1));
 	dynamic_pointer_cast<BlinnPhong>(grassShader)->SetSpecularCoeff(glm::tvec3<double>(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<BlinnPhong>(grassShader)->SetPhongExponent(1.0);
+	shared_ptr<Material> mirrorShader = make_shared<IdealSpecular>();
+	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetSpecularCoeff(glm::tvec3<double>(0.5f, 0.5f, 0.5f));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
-	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, grassShader)));
+	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, mirrorShader)));
 	world.AddSurface(shared_ptr<Surface>(new Triangle(glm::tvec3<double>(-3.0, 2.0, -5.0),
 															glm::tvec3<double>(3.0, 2.0, -4.0),
 															glm::tvec3<double>(3.5, 5.0, -4.0),

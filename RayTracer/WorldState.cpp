@@ -44,3 +44,18 @@ HitData WorldState::GetIntersection(Ray ray) {
 	}
 	return hitData;
 }
+
+HitData WorldState::GetIntersection(Ray ray, double t0) {
+	HitData hitData;
+	hitData.IsHit = false;
+	hitData.T = std::numeric_limits<double>::infinity();
+	// Find hit surfaces for current ray
+	for (const auto& s : surfaces) {
+		bool isHit = (*s).IsHit(ray, t0, hitData.T, hitData);
+		if (isHit) {
+			hitData.HitSurface = s;
+			hitData.IntersectingRay = ray;
+		}
+	}
+	return hitData;
+}
