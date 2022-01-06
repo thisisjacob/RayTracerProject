@@ -37,13 +37,18 @@ glm::tvec3<double> Triangle::Color(HitData& hitData, WorldState& world) {
 }
 
 glm::tvec3<double> Triangle::GetSurfaceNormal(HitData& hitData) {
-	return glm::tvec3<double>(0.0, 0.0, 0.0);
+	glm::tvec3<double> a = bVertex - aVertex;
+	glm::tvec3<double> b = cVertex - aVertex;
+	return glm::cross(a, b);
 }
 
 glm::tvec3<double> Triangle::GetUnitSurfaceNormal(HitData& hitData) {
-	return glm::tvec3<double>(0.0, 0.0, 0.0);
+	return glm::normalize(GetSurfaceNormal(hitData));
 }
 
 glm::tvec3<double> Triangle::GetIntersectionPoint(HitData& hitData) {
-	return glm::tvec3<double>(0.0, 0.0, 0.0);
+	glm::tvec3<double> p = glm::tvec3<double>(hitData.IntersectingRay.dir);
+	p *= hitData.T;
+	p += hitData.IntersectingRay.origin;
+	return p;
 }
