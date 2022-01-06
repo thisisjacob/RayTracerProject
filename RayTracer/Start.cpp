@@ -37,10 +37,10 @@ int main() {
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, grassShader)));
-	world.AddSurface(shared_ptr<Surface>(new Triangle(glm::tvec3<double>(0.0, 0.0, -4.0),
-															glm::tvec3<double>(1.0, 0.0, -4.0),
-															glm::tvec3<double>(0.5, 1.0, -4.0),
-															grassShader)));
+	world.AddSurface(shared_ptr<Surface>(new Triangle(glm::tvec3<double>(0.0, 2.0, -4.0),
+															glm::tvec3<double>(1.0, 2.0, -4.0),
+															glm::tvec3<double>(0.5, 3.0, -4.0),
+															shader1)));
 	shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::tvec3<double>(-1.5, 0.0, 4.2), glm::tvec3<double>(0.4, 0.4, 0.4) });
 	shared_ptr<Light> newLight = shared_ptr<Light>(new Light{ glm::tvec3<double>(-4.0, 2.0, 0.5), glm::tvec3<double>(0.4, 0.4, 0.4) });
 	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::tvec3<double>(0.0, 0.0, -3.0), glm::tvec3<double>(0.4, 0.4, 0.4) });
