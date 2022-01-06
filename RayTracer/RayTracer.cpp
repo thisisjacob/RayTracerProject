@@ -18,7 +18,7 @@ bool RayTracer::Render() {
 	// Generate image by projecting rays
 	for (auto v : camera.GenerateVComponents()) {
 		for (auto u : camera.GenerateUComponents()) {
-			Ray ray = Ray(camera.GetEye(), camera.GetFocalLength(), u, v);
+			Ray ray = Ray(camera.GetEye(), u, v, -camera.GetFocalLength());
 			HitData hitData = world.GetIntersection(ray);
 
 			// Writing color data to file

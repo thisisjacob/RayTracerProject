@@ -13,7 +13,7 @@ glm::tvec3<double> IdealSpecular::Shading(HitData& hitData, WorldState& world) {
 	glm::tvec3<double> d = glm::normalize(hitData.IntersectingRay.dir);
 	glm::tvec3<double> r = glm::normalize(d - 2 * (glm::dot(d, norm)) * norm);
 	glm::tvec3<double> p = hitData.HitSurface->GetIntersectionPoint(hitData);
-	auto lightCalc = RecursiveShading(Ray(p, -r.z, r.x, r.y), world, 0, 6);
+	auto lightCalc = RecursiveShading(Ray(p, r), world, 0, 6);
 	return glm::tvec3<double>(Clamp(lightCalc.x, 0.0, 1.0), Clamp(lightCalc.y, 0.0, 1.0), Clamp(lightCalc.z, 0.0, 1.0));
 }
 
@@ -28,7 +28,7 @@ glm::tvec3<double> IdealSpecular::RecursiveShading(Ray ray, WorldState& world, i
 	glm::tvec3<double> d = glm::normalize(hit.IntersectingRay.dir);
 	glm::tvec3<double> r = glm::normalize(d - 2 * (glm::dot(d, norm)) * norm);
 	glm::tvec3<double> p = hit.HitSurface->GetIntersectionPoint(hit);
-	return color + specularCoeff * RecursiveShading(Ray(p, -r.z, r.x, r.y), world, currIter + 1, maxIter);
+	return color + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1, maxIter);
 }
 
 bool IdealSpecular::SetAmbientCoeff(glm::tvec3<double> newAmbient) {

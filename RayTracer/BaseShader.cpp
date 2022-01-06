@@ -23,7 +23,7 @@ glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 		HitData shadowRecord;
 		shadowRecord.IsHit = false;
 		shadowRecord.T = std::numeric_limits<double>::infinity();
-		Ray shadowRay = Ray(surfacePoint, -lVecUnit.z, lVecUnit.x, lVecUnit.y);
+		Ray shadowRay = Ray(surfacePoint, lVecUnit);
 		// Check for objects blocking light source
 		for (auto surface : world.GetSurfaces()) {
 			surface->IsHit(shadowRay, 0.00000000001, shadowRecord.T, shadowRecord);
