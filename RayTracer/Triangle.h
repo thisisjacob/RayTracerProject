@@ -3,13 +3,14 @@
 #include "Ray.h"
 #include "Material.h"
 
-class Sphere : public Surface {
+class Triangle : public Surface {
 private:
-	double r;
-	glm::tvec3<double> center;
+	glm::tvec3<double> aVertex;
+	glm::tvec3<double> bVertex;
+	glm::tvec3<double> cVertex;
 	std::shared_ptr<Material> mat;
 public:
-	Sphere(double u, double v, double w, double r, const std::shared_ptr<Material> &mat);
+	Triangle(glm::tvec3<double> aVert, glm::tvec3<double> bVert, glm::tvec3<double> cVert, const std::shared_ptr<Material>& mat);
 	bool IsHit(Ray ray, double t0, double t1, HitData& record);
 	glm::tvec3<double> Color(HitData& hitData, WorldState& world);
 	glm::tvec3<double> GetSurfaceNormal(HitData& hitData);
