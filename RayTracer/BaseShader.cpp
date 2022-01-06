@@ -7,6 +7,7 @@ BlinnPhong::BlinnPhong() {
 	diffuseCoeff = glm::tvec3<double>();
 	specularCoeff = glm::tvec3<double>();
 	phongExponent = 0.0;
+	matType = MaterialType::BASIC;
 }
 
 glm::tvec3<double> BlinnPhong::Shading(HitData& hitData, WorldState& world) {

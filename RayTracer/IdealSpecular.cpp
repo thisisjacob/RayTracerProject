@@ -6,6 +6,7 @@ IdealSpecular::IdealSpecular() {
 	diffuseCoeff = glm::tvec3<double>();
 	specularCoeff = glm::tvec3<double>();
 	phongExponent = 0.0;
+	matType = MaterialType::REFLECTIVE;
 }
 
 glm::tvec3<double> IdealSpecular::Shading(HitData& hitData, WorldState& world) {
@@ -61,7 +62,11 @@ glm::tvec3<double> IdealSpecular::RecursiveShading(Ray ray, WorldState& world, i
 	glm::tvec3<double> d = glm::normalize(hit.IntersectingRay.dir);
 	glm::tvec3<double> r = glm::normalize(d - 2 * (glm::dot(d, norm)) * norm);
 	glm::tvec3<double> p = hit.HitSurface->GetIntersectionPoint(hit);
-	return color * specularCoeff + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1, maxIter);
+	// Recurse if hit material is also reflective
+	if (hit.HitSurface->mat->matType == MaterialType::REFLECTIVE)
+		return color * specularCoeff + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1, maxIter);
+	else
+		return color * specularCoeff;
 }
 
 bool IdealSpecular::SetAmbientCoeff(glm::tvec3<double> newAmbient) {
