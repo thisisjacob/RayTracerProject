@@ -54,6 +54,9 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Surfaces\Geometric</Filter>
     </ClCompile>
+    <ClCompile Include="IdealSpecular.cpp">
+      <Filter>Surfaces\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Surfaces\Geometric</Filter>
+    </ClInclude>
+    <ClInclude Include="IdealSpecular.h">
+      <Filter>Surfaces\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

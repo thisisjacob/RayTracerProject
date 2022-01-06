@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 #include "Ray.h"
 
+class WorldState;
+
 class Ray {
 public:
 	glm::tvec3<double> origin;
