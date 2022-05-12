@@ -28,6 +28,12 @@
     <Filter Include="World">
       <UniqueIdentifier>{55bc119c-1572-42dd-a41b-1a5420a53316}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI/OpenGL">
+      <UniqueIdentifier>{ef99219f-0889-4132-a403-3d06088ed763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI/OpenGL\ShaderFiles">
+      <UniqueIdentifier>{59445f47-e975-4f78-aac4-1ba4094a8dfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -53,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Surfaces\Geometric</Filter>
+    </ClCompile>
+    <ClCompile Include="MainInterface.cpp">
+      <Filter>UI/OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>UI/OpenGL\ShaderFiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,5 +104,19 @@
     <ClInclude Include="Triangle.h">
       <Filter>Surfaces\Geometric</Filter>
     </ClInclude>
+    <ClInclude Include="MainInterface.h">
+      <Filter>UI/OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>UI/OpenGL\ShaderFiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Vertex.glsl">
+      <Filter>UI/OpenGL\ShaderFiles</Filter>
+    </None>
+    <None Include="Fragment.glsl">
+      <Filter>UI/OpenGL\ShaderFiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

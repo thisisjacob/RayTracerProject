@@ -1,6 +1,7 @@
 #include "RayTracer.h";
 #include "WorldState.h"
 #include "BaseShader.h"
+#include "MainInterface.h"
 
 using std::shared_ptr;
 using std::make_shared;
@@ -51,6 +52,7 @@ int main() {
 	world.SetCamera(camera);
 	RayTracer ray(world);
 	ray.Render();
+	MainInterface mainUI(ray.getPixels(), camera.GetImageWidth(), camera.GetImageHeight());
 
 	return 0;
 }
