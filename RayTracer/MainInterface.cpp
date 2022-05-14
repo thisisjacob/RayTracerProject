@@ -22,6 +22,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 	window = glfwCreateWindow(800, 600, "Raytracer", NULL, NULL);
 	if (!window) {
 		std::cerr << "GLFW initialization failed.\n";
@@ -71,7 +72,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	shader.UseProgram();
 	shader.ModifyUniform("screenTexture", 0);
 
-	while (true) {
+	while (!glfwWindowShouldClose(window)) {
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shader.UseProgram();
