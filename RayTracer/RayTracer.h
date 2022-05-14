@@ -13,7 +13,9 @@
 class RayTracer {
 private:
 	WorldState world;
+	std::vector<glm::vec3> pixels;
 public:
 	RayTracer(WorldState world);
 	bool Render();
+	const std::vector<glm::vec3>& getPixels();
 };

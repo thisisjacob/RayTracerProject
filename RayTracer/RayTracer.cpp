@@ -1,6 +1,6 @@
 #include "RayTracer.h"
 
-RayTracer::RayTracer(WorldState world) {
+RayTracer::RayTracer(WorldState world) : pixels(world.GetCamera().GetImageHeight() * world.GetCamera().GetImageWidth()) {
 	this->world = world;
 }
 
@@ -15,6 +15,10 @@ bool RayTracer::Render() {
 	fileWriter << "P3\n";
 	fileWriter << camera.GetImageWidth() << " " << camera.GetImageHeight() << "\n";
 	fileWriter << "255\n";
+
+	int yPos = 0;
+	int xPos = 0;
+	int i = 0;
 	// Generate image by projecting rays
 	for (auto v : camera.GenerateVComponents()) {
 		for (auto u : camera.GenerateUComponents()) {
@@ -25,13 +29,17 @@ bool RayTracer::Render() {
 			if (hitData.IsHit) {
 				// Found closest object, determine shading and send to file
 				glm::tvec3<double> color = hitData.HitSurface->Color(hitData, world);
-				fileWriter << (int)(255 * color.x) << " " << (int)(255 * color.y) << " " << (int)(255 * color.z) << "\n";
+				pixels[i] = color;
 			}
-			else
-				fileWriter << "53 81 92\n";
+			else {
+				pixels[i] = glm::vec3(0.207, 0.318, 0.361);
+			}
+			i++;
 		}
 	}
 	fileWriter.close();
 
 	return true;
 }
+
+const std::vector<glm::vec3>& RayTracer::getPixels() { return pixels; }
