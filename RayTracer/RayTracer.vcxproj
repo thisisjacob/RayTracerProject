@@ -152,6 +152,19 @@
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseShader.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="HitData.h" />
+    <ClInclude Include="IdealSpecular.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MathFunctions.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayTracer.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Surface.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="WorldState.h" />
     <None Include="Fragment.glsl" />
     <None Include="Vertex.glsl" />
   </ItemGroup>

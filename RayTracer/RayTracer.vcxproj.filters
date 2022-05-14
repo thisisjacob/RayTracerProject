@@ -60,8 +60,9 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Surfaces\Geometric</Filter>
     </ClCompile>
-    <ClCompile Include="IdealSpecular.cpp">
-      <Filter>Surfaces\Materials</Filter>
+	<ClCompile Include="IdealSpecular.cpp">
+		<Filter>Surfaces\Materials</Filter>
+	</ClCompile>
     <ClCompile Include="MainInterface.cpp">
       <Filter>UI/OpenGL</Filter>
     </ClCompile>
