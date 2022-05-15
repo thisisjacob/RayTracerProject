@@ -1,5 +1,6 @@
 #pragma once
 
+// Used for restricting values to be in the range of [min, max]
 template <typename T>
 T Clamp(T val, T min, T max) {
 
@@ -10,3 +11,6 @@ T Clamp(T val, T min, T max) {
 	else
 		return max;
 }
+
+// A uniform constant for small values
+const float EPSILON = 0.0001f;

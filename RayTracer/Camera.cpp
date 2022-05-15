@@ -4,37 +4,37 @@ Camera::Camera() {
 	this->imageWidth = 400;
 	this->imageHeight = 400;
 	this->focalLength = 1.0;
-	aspectRatio = (double)imageWidth / (double)imageHeight;
-	eye = glm::tvec3<double>(0.0, 0.0, 0.0);
+	aspectRatio = (float)imageWidth / (float)imageHeight;
+	eye = glm::vec3(0.0, 0.0, 0.0);
 }
 
-Camera::Camera(int imageWidth, int imageHeight, double u, double v, double w, double focalLength) {
+Camera::Camera(int imageWidth, int imageHeight, float u, float v, float w, float focalLength) {
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
 	this->focalLength = focalLength;
-	aspectRatio = (double)imageWidth / (double)imageHeight;
-	eye = glm::tvec3<double>(u, v, w);
+	aspectRatio = (float)imageWidth / (float)imageHeight;
+	eye = glm::vec3(u, v, w);
 }
 
-std::vector<double> Camera::GenerateUComponents() const {
-	std::vector<double> components;
+std::vector<float> Camera::GenerateUComponents() const {
+	std::vector<float> components;
 	for (int col = 0; col < imageWidth; col++) {
-		double u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (double)(col);
+		float u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (float)(col);
 		components.push_back(u);
 	}
 	return components;
 }
 
-std::vector<double> Camera::GenerateVComponents() const {
-	std::vector<double> components;
+std::vector<float> Camera::GenerateVComponents() const {
+	std::vector<float> components;
 	for (int row = 0; row < imageHeight; row++) {
-		double v = 0.5 - (1.0 / imageHeight) * (double)(row);
+		float v = 0.5 - (1.0 / imageHeight) * (float)(row);
 		components.push_back(v);
 	}
 	return components;
 }
 
-const glm::tvec3<double> Camera::GetEye() const {
+const glm::vec3 Camera::GetEye() const {
 	return eye;
 }
 
@@ -46,10 +46,10 @@ int  Camera::GetImageHeight() const {
 	return imageHeight;
 }
 
-double Camera::GetFocalLength() const {
+float Camera::GetFocalLength() const {
 	return focalLength;
 }
 
-double Camera::GetAspectRatio() const {
+float Camera::GetAspectRatio() const {
 	return aspectRatio;
 }

@@ -3,6 +3,6 @@
 #include "glm/glm.hpp";
 
 struct Light {
-	glm::tvec3<double> lightPos;
-	glm::tvec3<double> lightIntensity;
+	glm::vec3 lightPos;
+	glm::vec3 lightIntensity;
 };

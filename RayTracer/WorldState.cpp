@@ -33,7 +33,7 @@ const Camera WorldState::GetCamera() {
 HitData WorldState::GetIntersection(Ray ray) {
 	HitData hitData;
 	hitData.IsHit = false;
-	hitData.T = std::numeric_limits<double>::infinity();
+	hitData.T = std::numeric_limits<float>::infinity();
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
 		bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
@@ -48,10 +48,10 @@ HitData WorldState::GetIntersection(Ray ray) {
 	return hitData;
 }
 
-HitData WorldState::GetIntersection(Ray ray, double t0) {
+HitData WorldState::GetIntersection(Ray ray, float t0) {
 	HitData hitData;
 	hitData.IsHit = false;
-	hitData.T = std::numeric_limits<double>::infinity();
+	hitData.T = std::numeric_limits<float>::infinity();
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
 		bool isHit = (*s).IsHit(ray, t0, hitData.T, hitData);

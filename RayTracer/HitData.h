@@ -7,7 +7,7 @@ class Surface;
 
 struct HitData {
 	bool IsHit;
-	double T;
+	float T;
 	std::shared_ptr<Surface> HitSurface;
 	Ray IntersectingRay;
 };

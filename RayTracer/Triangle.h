@@ -5,14 +5,14 @@
 
 class Triangle : public Surface {
 private:
-	glm::tvec3<double> aVertex;
-	glm::tvec3<double> bVertex;
-	glm::tvec3<double> cVertex;
+	glm::vec3 aVertex;
+	glm::vec3 bVertex;
+	glm::vec3 cVertex;
 public:
-	Triangle(glm::tvec3<double> aVert, glm::tvec3<double> bVert, glm::tvec3<double> cVert, const std::shared_ptr<Material>& mat);
-	bool IsHit(Ray ray, double t0, double t1, HitData& record);
-	glm::tvec3<double> Color(HitData& hitData, WorldState& world);
-	glm::tvec3<double> GetSurfaceNormal(HitData& hitData);
-	glm::tvec3<double> GetUnitSurfaceNormal(HitData& hitData);
-	glm::tvec3<double> GetIntersectionPoint(HitData& hitData);
+	Triangle(glm::vec3 aVert, glm::vec3 bVert, glm::vec3 cVert, const std::shared_ptr<Material>& mat);
+	bool IsHit(Ray ray, float t0, float t1, HitData& record);
+	glm::vec3 Color(HitData& hitData, WorldState& world);
+	glm::vec3 GetSurfaceNormal(HitData& hitData);
+	glm::vec3 GetUnitSurfaceNormal(HitData& hitData);
+	glm::vec3 GetIntersectionPoint(HitData& hitData);
 };

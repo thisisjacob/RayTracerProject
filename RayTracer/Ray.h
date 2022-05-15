@@ -6,9 +6,9 @@ class WorldState;
 
 class Ray {
 public:
-	glm::tvec3<double> origin;
-	glm::tvec3<double> dir;
+	glm::vec3 origin;
+	glm::vec3 dir;
 	Ray();
-	Ray(glm::tvec3<double> origin, double focalLength, double u, double v);
-	Ray(const glm::tvec3<double> &origin, const glm::tvec3<double> &dir);
-};
+	Ray(glm::vec3 origin, float focalLength, float u, float v);
+	Ray(const glm::vec3& origin, const glm::vec3& dir);
+};	

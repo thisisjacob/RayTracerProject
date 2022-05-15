@@ -23,7 +23,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-	window = glfwCreateWindow(800, 600, "Raytracer", NULL, NULL);
+	window = glfwCreateWindow(800, 500, "Raytracer", NULL, NULL);
 	if (!window) {
 		std::cerr << "GLFW initialization failed.\n";
 		glfwTerminate();
