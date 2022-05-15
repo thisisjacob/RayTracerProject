@@ -60,6 +60,9 @@
     <ClCompile Include="Triangle.cpp">
       <Filter>Surfaces\Geometric</Filter>
     </ClCompile>
+	<ClCompile Include="IdealSpecular.cpp">
+		<Filter>Surfaces\Materials</Filter>
+	</ClCompile>
     <ClCompile Include="MainInterface.cpp">
       <Filter>UI/OpenGL</Filter>
     </ClCompile>
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="Triangle.h">
       <Filter>Surfaces\Geometric</Filter>
+    </ClInclude>
+    <ClInclude Include="IdealSpecular.h">
+      <Filter>Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="MainInterface.h">
       <Filter>UI/OpenGL</Filter>

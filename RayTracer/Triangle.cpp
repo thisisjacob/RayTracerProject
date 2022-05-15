@@ -30,6 +30,7 @@ bool Triangle::IsHit(Ray ray, double t0, double t1, HitData& record) {
 		return false;
 	record.T = t;
 	record.IsHit = true;
+	return true;
 };
 
 glm::tvec3<double> Triangle::Color(HitData& hitData, WorldState& world) {

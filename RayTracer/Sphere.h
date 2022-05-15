@@ -7,7 +7,6 @@ class Sphere : public Surface {
 private:
 	double r;
 	glm::tvec3<double> center;
-	std::shared_ptr<Material> mat;
 public:
 	Sphere(double u, double v, double w, double r, const std::shared_ptr<Material> &mat);
 	bool IsHit(Ray ray, double t0, double t1, HitData& record);

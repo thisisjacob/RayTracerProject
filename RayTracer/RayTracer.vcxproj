@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="BaseShader.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="IdealSpecular.cpp" />
     <ClCompile Include="MainInterface.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayTracer.cpp" />
@@ -154,19 +155,16 @@
     <ClInclude Include="BaseShader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="HitData.h" />
+    <ClInclude Include="IdealSpecular.h" />
     <ClInclude Include="Light.h" />
-    <ClInclude Include="MainInterface.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RayTracer.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="WorldState.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Fragment.glsl" />
     <None Include="Vertex.glsl" />
   </ItemGroup>

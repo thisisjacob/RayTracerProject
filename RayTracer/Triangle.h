@@ -8,7 +8,6 @@ private:
 	glm::tvec3<double> aVertex;
 	glm::tvec3<double> bVertex;
 	glm::tvec3<double> cVertex;
-	std::shared_ptr<Material> mat;
 public:
 	Triangle(glm::tvec3<double> aVert, glm::tvec3<double> bVert, glm::tvec3<double> cVert, const std::shared_ptr<Material>& mat);
 	bool IsHit(Ray ray, double t0, double t1, HitData& record);

@@ -22,18 +22,8 @@ bool RayTracer::Render() {
 	// Generate image by projecting rays
 	for (auto v : camera.GenerateVComponents()) {
 		for (auto u : camera.GenerateUComponents()) {
-			Ray ray = Ray(camera.GetEye(), camera.GetFocalLength(), u, v);
-			HitData hitData;
-			hitData.IsHit = false;
-			hitData.T = std::numeric_limits<double>::infinity();
-			// Find hit surfaces for current ray
-			for (const auto& s : world.GetSurfaces()) {
-				bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
-				if (isHit) {
-					hitData.HitSurface = s;
-					hitData.IntersectingRay = ray;
-				}
-			}
+			Ray ray = Ray(camera.GetEye(), u, v, -camera.GetFocalLength());
+			HitData hitData = world.GetIntersection(ray);
 
 			// Writing color data to file
 			if (hitData.IsHit) {
