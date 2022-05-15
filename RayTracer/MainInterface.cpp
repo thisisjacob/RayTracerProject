@@ -5,7 +5,7 @@ void glfwErrorCallback(int error, const char* description);
 void messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param);
 
 
-MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, int height) {
+MainInterface::MainInterface(RayTracer rayTracer) {
 	const glm::vec2 renderQuads[] = {
 		glm::vec2(-1.0, 1.0), glm::vec2(0.0, 1.0),
 		glm::vec2(-1.0, -1.0), glm::vec2(0.0, 0.0),
@@ -23,7 +23,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-	window = glfwCreateWindow(800, 500, "Raytracer", NULL, NULL);
+	window = glfwCreateWindow(rayTracer.getWidth(), rayTracer.getHeight(), "Raytracer", NULL, NULL);
 	if (!window) {
 		std::cerr << "GLFW initialization failed.\n";
 		glfwTerminate();
@@ -35,7 +35,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	}
 
 	// Set GLFW settings
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, rayTracer.getWidth(), rayTracer.getHeight());
 	glDebugMessageCallback(messageCallback, nullptr);
 
 	unsigned int screenVAO, screenVBO;
@@ -60,7 +60,7 @@ MainInterface::MainInterface(const std::vector<glm::vec3>& pixels, int width, in
 	unsigned int tex;
 	glActiveTexture(GL_TEXTURE0);
 	glCreateTextures(GL_TEXTURE_2D, 1, &tex);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_FLOAT, pixels.data());
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rayTracer.getWidth(), rayTracer.getHeight(), 0, GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
