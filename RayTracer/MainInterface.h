@@ -7,7 +7,7 @@
 
 class MainInterface {
 public:
-	MainInterface(const std::vector<glm::vec3>& pixels, int width, int height);
+	MainInterface(RayTracer rayTracer);
 	~MainInterface();
 private:
 	GLFWwindow* window;

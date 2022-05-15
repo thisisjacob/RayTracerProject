@@ -33,3 +33,11 @@ bool RayTracer::Render() {
 }
 
 const std::vector<glm::vec3>& RayTracer::getPixels() { return pixels; }
+
+int RayTracer::getWidth() {
+	return world.GetCamera().GetImageWidth();
+}
+
+int RayTracer::getHeight() {
+	return world.GetCamera().GetImageHeight();
+}

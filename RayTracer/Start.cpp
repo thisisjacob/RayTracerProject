@@ -58,7 +58,7 @@ int main() {
 	world.SetCamera(camera);
 	RayTracer ray(world);
 	ray.Render();
-	MainInterface mainUI(ray.getPixels(), camera.GetImageWidth(), camera.GetImageHeight());
+	MainInterface mainUI(ray);
 
 	return 0;
 }
