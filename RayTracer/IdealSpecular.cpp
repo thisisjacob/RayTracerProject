@@ -32,29 +32,18 @@ glm::tvec3<double> IdealSpecular::Shading(HitData& hitData, WorldState& world) {
 		if (!shadowRecord.IsHit) {
 			// Calculate diffuse lighting
 			lightCalc += intensity * diffuseCoeff * std::max(0.0, glm::dot(unitNormal, lVecUnit));
-			// Calculate specular lighting
-			glm::tvec3<double> vVecUnit = world.GetCamera().GetEye() - surfacePoint;
-			vVecUnit = glm::normalize(vVecUnit);
-			glm::tvec3<double> h = vVecUnit + lVecUnit;
-			h = vVecUnit + lVecUnit;
-			h /= h.length();
-			h = glm::normalize(h);
-			lightCalc += specularCoeff * intensity * std::pow(std::max(0.0, glm::dot(unitNormal, h)), phongExponent);
 		}
 	}
 	glm::tvec3<double> r = glm::normalize(hitData.IntersectingRay.dir - 2 * (glm::dot(hitData.IntersectingRay.dir, unitNormal)) * unitNormal);
 	// Calculate reflections
-	lightCalc += RecursiveShading(Ray(surfacePoint, r), world, 0, 6);
+	lightCalc += specularCoeff * RecursiveShading(Ray(surfacePoint, r), world, 0);
 	return glm::tvec3<double>(Clamp(lightCalc.x, 0.0, 1.0), Clamp(lightCalc.y, 0.0, 1.0), Clamp(lightCalc.z, 0.0, 1.0));
 }
 
-glm::tvec3<double> IdealSpecular::RecursiveShading(Ray ray, WorldState& world, int currIter, int maxIter) {
+glm::tvec3<double> IdealSpecular::RecursiveShading(Ray ray, WorldState& world, int currIter) {
 	HitData hit = world.GetIntersection(ray, 0.00000000001);
 	glm::tvec3<double> color = glm::tvec3<double>(0.0);
-	if (hit.IsHit && !hit.HitSurface) {
-		int i = 0;
-	}
-	if (!hit.IsHit || currIter >= maxIter)
+	if (!hit.IsHit || currIter > MAX_REFLECTION_RECURSION_DEPTH)
 		return color;
 	else
 		color = hit.HitSurface->Color(hit, world);
@@ -64,7 +53,7 @@ glm::tvec3<double> IdealSpecular::RecursiveShading(Ray ray, WorldState& world, i
 	glm::tvec3<double> p = hit.HitSurface->GetIntersectionPoint(hit);
 	// Recurse if hit material is also reflective
 	if (hit.HitSurface->mat->matType == MaterialType::REFLECTIVE)
-		return color * specularCoeff + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1, maxIter);
+		return color * specularCoeff + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1);
 	else
 		return color * specularCoeff;
 }
