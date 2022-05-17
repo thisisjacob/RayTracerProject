@@ -9,11 +9,14 @@
 #include "Triangle.h"
 #include "WorldState.h"
 #include "Camera.h"
+#include <thread>
 
 class RayTracer {
 private:
 	WorldState world;
 	std::vector<glm::vec3> pixels;
+	void calculatePixel(const Camera& cam, int xPixel, int yPixel);
+	void calculatePixels(const Camera& cam, int startYPixel, int endYPixel);
 public:
 	RayTracer(WorldState world);
 	bool Render();
