@@ -33,6 +33,17 @@ bool Triangle::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	return true;
 };
 
+BoundingBox Triangle::boundingBox() const {
+	float xMin = std::min({ aVertex.x, bVertex.x, cVertex.x });
+	float yMin = std::min({ aVertex.y, bVertex.y, cVertex.y });
+	float zMin = std::min({ aVertex.z, bVertex.z, cVertex.z });
+	float xMax = std::max({ aVertex.x, bVertex.x, cVertex.x });
+	float yMax = std::max({ aVertex.y, bVertex.y, cVertex.y });
+	float zMax = std::max({ aVertex.z, bVertex.z, cVertex.z });
+
+	return BoundingBox(glm::vec3(xMin, yMin, zMin), glm::vec3(xMax, yMax, zMax));
+}
+
 glm::vec3 Triangle::Color(HitData& hitData, WorldState& world) {
 	return mat->Shading(hitData, world);
 }

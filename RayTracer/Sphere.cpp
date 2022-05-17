@@ -38,6 +38,12 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	return false;
 }
 
+BoundingBox Sphere::boundingBox() const {
+	glm::vec3 min = center - glm::vec3(r, r, r);
+	glm::vec3 max = center + glm::vec3(r, r, r);
+	return BoundingBox(min, max);
+}
+
 glm::vec3 Sphere::Color(HitData& hitData, WorldState& world) {
 	return mat.get()->Shading(hitData, world);
 }
