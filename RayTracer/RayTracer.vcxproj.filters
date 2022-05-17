@@ -69,6 +69,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>UI/OpenGL\ShaderFiles</Filter>
     </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Surfaces\Geometric</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RayTracer.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="MainInterface.h">
       <Filter>UI/OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Surfaces\Geometric</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
