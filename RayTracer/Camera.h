@@ -14,8 +14,8 @@ public:
 	Camera(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
 	// Generates vectors holding each U and V component of the perspective vectors
 	// This can be used for the main ray tracing loop
-	std::vector<float> GenerateUComponents() const;
-	std::vector<float> GenerateVComponents() const;
+	float GetUValue(int xPixel) const;
+	float GetVValue(int yPixel) const;
 	const glm::vec3 GetEye() const;
 	int GetImageWidth() const;
 	int GetImageHeight() const;
