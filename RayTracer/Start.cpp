@@ -39,7 +39,7 @@ int main() {
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetSpecularCoeff(glm::vec3(0.7, 0.7, 0.7));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetAmbientCoeff(glm::vec3(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetDiffuseCoeff(glm::vec3(0.6, 0.6, 0.6));
-	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
+	//world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 5.0, shader1)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, mirrorShader)));

@@ -10,10 +10,9 @@ bool RayTracer::Render() {
 	int xPos = 0;
 	int i = 0;
 	// Generate image by projecting rays
-	for (auto v : camera.GenerateVComponents()) {
-		for (auto u : camera.GenerateUComponents()) {
-			//std::cout << "v: " << v << " u: " << u << "\n";
-			Ray ray = Ray(camera.GetEye(), u, v, -camera.GetFocalLength());
+	for (int yPixel = 0; yPixel < camera.GetImageHeight(); yPixel++) {
+		for (int xPixel = 0; xPixel < camera.GetImageWidth(); xPixel++) {
+			Ray ray = Ray(camera.GetEye(), camera.GetUValue(xPixel), camera.GetVValue(yPixel), -camera.GetFocalLength());
 			HitData hitData = world.GetIntersection(ray);
 
 			// Writing color data to file

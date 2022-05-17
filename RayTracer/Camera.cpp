@@ -16,22 +16,12 @@ Camera::Camera(int imageWidth, int imageHeight, float u, float v, float w, float
 	eye = glm::vec3(u, v, w);
 }
 
-std::vector<float> Camera::GenerateUComponents() const {
-	std::vector<float> components;
-	for (int col = 0; col < imageWidth; col++) {
-		float u = aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (float)(col);
-		components.push_back(u);
-	}
-	return components;
+float Camera::GetUValue(int xPixel) const {
+	return aspectRatio * -0.5 + ((aspectRatio * 1.0) / imageWidth) * (float)xPixel;
 }
 
-std::vector<float> Camera::GenerateVComponents() const {
-	std::vector<float> components;
-	for (int row = 0; row < imageHeight; row++) {
-		float v = 0.5 - (1.0 / imageHeight) * (float)(row);
-		components.push_back(v);
-	}
-	return components;
+float Camera::GetVValue(int yPixel) const {
+	return 0.5 - (1.0 / imageHeight) * (float)(yPixel);
 }
 
 const glm::vec3 Camera::GetEye() const {
