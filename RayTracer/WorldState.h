@@ -4,6 +4,7 @@
 #include "Surface.h";
 #include <vector>
 #include "Camera.h"
+#include <iostream>
 
 // Holds all of the surfaces and lights to be used by the Ray Tracer
 // This should be used whenever information about the world is needed

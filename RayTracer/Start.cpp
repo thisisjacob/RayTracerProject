@@ -3,6 +3,7 @@
 #include "BaseShader.h"
 #include "IdealSpecular.h"
 #include "MainInterface.h"
+#include "Model.h"
 
 using std::shared_ptr;
 using std::make_shared;
@@ -40,6 +41,7 @@ int main() {
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetAmbientCoeff(glm::vec3(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetDiffuseCoeff(glm::vec3(0.6, 0.6, 0.6));
 	//world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 5.0, shader1)));
+	/*
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, mirrorShader)));
@@ -48,13 +50,26 @@ int main() {
 															glm::vec3(3.0, 2.0, -4.0),
 															glm::vec3(3.5, 5.0, -4.0),
 															shader1)));
-	shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::vec3(-1.5, 0.0, 4.2), glm::vec3(0.4, 0.4, 0.4) });
-	shared_ptr<Light> newLight = shared_ptr<Light>(new Light{ glm::vec3(-4.0, 2.0, 0.5), glm::vec3(0.4, 0.4, 0.4) });
-	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::vec3(0.0, 0.0, -3.0), glm::vec3(0.4, 0.4, 0.4) });
-	world.AddLight(light);
-	world.AddLight(newLight);
+	*/
+	
+	
+	//Model model = ModelImporter::loadModel("./teapot.fbx");
+	//world.AddSurface(shared_ptr<Surface>(new Model(model, shader2)));
+	Model model = Model("./teapot.fbx");
+	// Temporary method for rendering model
+	for (Mesh mesh : model.meshes) {
+		for (const Triangle& surface : mesh.surfaces) {
+			world.AddSurface(shared_ptr<Surface>(new Triangle(surface)));
+		}
+	}
+
+	//shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::vec3(-1.5, 0.0, 4.2), glm::vec3(0.4, 0.4, 0.4) });
+	//shared_ptr<Light> newLight = shared_ptr<Light>(new Light{ glm::vec3(-4.0, 2.0, 0.5), glm::vec3(0.4, 0.4, 0.4) });
+	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::vec3(0.0, 0.0, 8.5), glm::vec3(0.4, 0.4, 0.4) });
+	//world.AddLight(light);
+	//world.AddLight(newLight);
 	world.AddLight(backLight);
-	Camera camera = Camera(800, 400, -1.0, 0.0, 5.5, 1.0);
+	Camera camera = Camera(200, 200, 0.0, 0.0, 5.5, 1.0);
 	world.SetCamera(camera);
 	RayTracer ray(world);
 	ray.Render();

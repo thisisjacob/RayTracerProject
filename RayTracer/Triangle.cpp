@@ -8,7 +8,10 @@ Triangle::Triangle(glm::vec3 aVert, glm::vec3 bVert, glm::vec3 cVert, const std:
 }
 
 bool Triangle::IsHit(Ray ray, float t0, float t1, HitData& record) {
-	glm::tmat3x3<float> A;
+	// Checks for if the triangle is degenerate, to prevent hits on it
+	if ((aVertex == bVertex) || (aVertex == cVertex) || (cVertex == bVertex)) { return false; }
+
+	glm::mat3x3 A;
 	A[0] = glm::vec3(aVertex.x - bVertex.x, aVertex.x - cVertex.x, ray.dir.x);
 	A[1] = glm::vec3(aVertex.y - bVertex.y, aVertex.y - cVertex.y, ray.dir.y);
 	A[2] = glm::vec3(aVertex.z - bVertex.z, aVertex.z - cVertex.z, ray.dir.z);

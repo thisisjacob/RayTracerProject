@@ -34,6 +34,9 @@
     <Filter Include="UI/OpenGL\ShaderFiles">
       <UniqueIdentifier>{59445f47-e975-4f78-aac4-1ba4094a8dfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Surfaces\Model">
+      <UniqueIdentifier>{d1738454-9170-4eaf-8ef6-fe91083c336b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Surfaces\Geometric</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Surfaces\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
       <Filter>Surfaces\Geometric</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Surfaces\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Surfaces\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
