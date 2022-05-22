@@ -10,7 +10,7 @@ private:
 	glm::vec3 center;
 public:
 	Sphere(float u, float v, float w, float r, const std::shared_ptr<Material> &mat);
-	bool IsHit(Ray ray, float t0, float t1, HitData& record);
+	bool IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record);
 	BoundingBox boundingBox() const;
 	glm::vec3 Color(HitData& hitData, WorldState& world);
 	glm::vec3 GetSurfaceNormal(HitData& hitData);

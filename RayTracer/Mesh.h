@@ -4,5 +4,5 @@
 #include <vector>
 
 struct Mesh {
-	std::vector<Triangle> surfaces;
+	std::vector<std::shared_ptr<Surface>> surfaces;
 };

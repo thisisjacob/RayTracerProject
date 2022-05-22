@@ -11,7 +11,7 @@ Sphere::Sphere(float u, float v, float w, float r, const shared_ptr<Material>& m
 	this->mat = mat;
 }
 
-bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
+bool Sphere::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
 	glm::vec3 eMinusc = ray.origin - center;
 
 	// Use quadratic formula to test discriminant for intersections
@@ -28,11 +28,13 @@ bool Sphere::IsHit(Ray ray, float t0, float t1, HitData& record) {
 	if (minusT > t0 && minusT < t1) {
 		record.T = minusT;
 		record.IsHit = true;
+		record.HitSurface = callingSurface;
 		return true;
 	}
 	else if (addT > t0 && addT < t1) {
 		record.T = addT;
 		record.IsHit = true;
+		record.HitSurface = callingSurface;
 		return true;
 	}
 	return false;

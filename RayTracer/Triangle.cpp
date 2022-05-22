@@ -7,7 +7,7 @@ Triangle::Triangle(glm::vec3 aVert, glm::vec3 bVert, glm::vec3 cVert, const std:
 	this->mat = mat;
 }
 
-bool Triangle::IsHit(Ray ray, float t0, float t1, HitData& record) {
+bool Triangle::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
 	// Checks for if the triangle is degenerate, to prevent hits on it
 	if ((aVertex == bVertex) || (aVertex == cVertex) || (cVertex == bVertex)) { return false; }
 
@@ -33,6 +33,7 @@ bool Triangle::IsHit(Ray ray, float t0, float t1, HitData& record) {
 		return false;
 	record.T = t;
 	record.IsHit = true;
+	record.HitSurface = callingSurface;
 	return true;
 };
 

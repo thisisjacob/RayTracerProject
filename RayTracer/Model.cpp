@@ -2,18 +2,10 @@
 
 Model::Model() {}
 
-Model::Model(std::string filePath) {
-	Model model = ModelImporter::loadModel(filePath);
+Model::Model(std::string filePath, std::shared_ptr<Material> mat) {
+	Model model = ModelImporter::loadModel(filePath, mat);
 	this->meshes = model.meshes;
-	this->mat = model.mat;
-}
-
-Model::Model(Model model, const std::shared_ptr<Material> mat) {
-	for (Mesh& mesh : model.meshes)
-		this->meshes.push_back(mesh);
-
 	this->mat = mat;
-
 }
 
 bool Model::addMesh(Mesh& mesh) {
@@ -21,11 +13,11 @@ bool Model::addMesh(Mesh& mesh) {
 	return true;
 }
 
-bool Model::IsHit(Ray ray, float t0, float t1, HitData& record) {
+bool Model::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
 	bool res = false;
 	for (const Mesh& mesh : meshes) {
-		for (Triangle surface : mesh.surfaces) {
-			res = res || surface.IsHit(ray, t0, record.T, record);
+		for (auto surface : mesh.surfaces) {
+			res = res || surface->IsHit(surface, ray, t0, record.T, record);
 		}
 	}
 	return res;
@@ -51,11 +43,12 @@ glm::vec3 Model::GetIntersectionPoint(HitData& record) {
 	return glm::vec3();
 }
 
-Model ModelImporter::loadModel(std::string filePath) {
+Model ModelImporter::loadModel(std::string filePath, std::shared_ptr<Material> mat) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(filePath, aiProcess_Triangulate);
 
 	Model model = Model();
+	model.mat = mat;
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 		std::cerr << "Error importing model in file path: " << filePath << "\n";
 	}
@@ -92,14 +85,7 @@ bool ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, Model& model
 		cVertex.x = mesh->mVertices[i + 2].x;
 		cVertex.y = mesh->mVertices[i + 2].y;
 		cVertex.z = mesh->mVertices[i + 2].z;
-		// TESTING SHADER - DELETE LATER
-		std::shared_ptr<Material> shader2 = std::make_shared<BlinnPhong>();
-		std::dynamic_pointer_cast<BlinnPhong>(shader2)->SetDiffuseCoeff(glm::vec3(0.2, 0.2, 0.7));
-		std::dynamic_pointer_cast<BlinnPhong>(shader2)->SetAmbientCoeff(glm::vec3(0.2, 0.2, 0.7));
-		std::dynamic_pointer_cast<BlinnPhong>(shader2)->SetAmbientIntensity(glm::vec3(0.2, 0.2, 0.2));
-		std::dynamic_pointer_cast<BlinnPhong>(shader2)->SetSpecularCoeff(glm::vec3(0.5, 0.5, 0.5));
-		std::dynamic_pointer_cast<BlinnPhong>(shader2)->SetPhongExponent(16.0);
-		newMesh.surfaces.push_back(Triangle(aVertex, bVertex, cVertex, shader2));
+		newMesh.surfaces.push_back(std::shared_ptr<Surface>(new Triangle(aVertex, bVertex, cVertex, model.mat)));
 	}
 	model.addMesh(newMesh);
 	return true;

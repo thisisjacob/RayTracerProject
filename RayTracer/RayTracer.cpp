@@ -12,7 +12,7 @@ void RayTracer::calculatePixel(const Camera& cam, int xPixel, int yPixel) {
 	if (hitData.IsHit) {
 		// Found closest object, determine shading and send to file
 		glm::vec3 color = hitData.HitSurface->Color(hitData, world);
-		std::cout << color.x << " " << color.y << " " << color.z << "\n";
+		//std::cout << color.x << " " << color.y << " " << color.z << "\n";
 		pixels[yPixel * cam.GetImageWidth() + xPixel] = color;
 		//pixels[yPixel * cam.GetImageWidth() + xPixel] = hitData.HitSurface->GetIntersectionPoint(hitData);
 	}
@@ -25,7 +25,9 @@ void RayTracer::calculatePixels(const Camera& cam, int startYPixel, int endYPixe
 	for (int y = startYPixel; y < endYPixel; y++) {
 		for (int x = 0; x < cam.GetImageWidth(); x++) {
 			calculatePixel(cam, x, y);
+			
 		}
+		std::cout << "Row: " << y << " Complete\n";
 	}
 }
 
