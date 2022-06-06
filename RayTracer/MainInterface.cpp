@@ -5,7 +5,7 @@ void glfwErrorCallback(int error, const char* description);
 void messageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param);
 
 
-MainInterface::MainInterface(RayTracer rayTracer) {
+MainInterface::MainInterface(RayTracer& rayTracer) {
 	const glm::vec2 renderQuads[] = {
 		glm::vec2(-1.0, 1.0), glm::vec2(0.0, 1.0),
 		glm::vec2(-1.0, -1.0), glm::vec2(0.0, 0.0),
@@ -54,16 +54,12 @@ MainInterface::MainInterface(RayTracer rayTracer) {
 	glVertexArrayAttribBinding(screenVAO, 0, 0);
 	glVertexArrayAttribBinding(screenVAO, 1, 0);
 
-	
-	
-
 	unsigned int tex;
 	glActiveTexture(GL_TEXTURE0);
 	glCreateTextures(GL_TEXTURE_2D, 1, &tex);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rayTracer.getWidth(), rayTracer.getHeight(), 0, GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	Shader shader;
 	shader.AddShader("Vertex.glsl", GL_VERTEX_SHADER);
@@ -72,7 +68,14 @@ MainInterface::MainInterface(RayTracer rayTracer) {
 	shader.UseProgram();
 	shader.ModifyUniform("screenTexture", 0);
 
+	// Begin rendering raytraced image
+	rayTracer.Render();
+
 	while (!glfwWindowShouldClose(window)) {
+		// Get updated texture
+		//glTexSubImage2D(GL_TEXTURE_2D, tex, 0, 0, rayTracer.getWidth(), rayTracer.getHeight(), GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rayTracer.getWidth(), rayTracer.getHeight(), 0, GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
+
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shader.UseProgram();
@@ -83,6 +86,12 @@ MainInterface::MainInterface(RayTracer rayTracer) {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+	// Window closed, preform cleanup and end the program
+	glfwTerminate();
+	glDeleteBuffers(1, &screenVBO);
+	glDeleteBuffers(1, &screenVAO);
+	glDeleteTextures(1, &tex);
+	exit(0);
 }
 
 MainInterface::~MainInterface() {

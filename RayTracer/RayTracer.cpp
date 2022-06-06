@@ -25,7 +25,6 @@ void RayTracer::calculatePixels(const Camera& cam, int startYPixel, int endYPixe
 	for (int y = startYPixel; y < endYPixel; y++) {
 		for (int x = 0; x < cam.GetImageWidth(); x++) {
 			calculatePixel(cam, x, y);
-			
 		}
 		std::cout << "Row: " << y << " Complete\n";
 	}
@@ -71,4 +70,10 @@ int RayTracer::getWidth() {
 
 int RayTracer::getHeight() {
 	return world.GetCamera().GetImageHeight();
+}
+
+bool RayTracer::refreshImage(int newWidth, int newHeight) {
+	this->world.GetCamera().refreshImage(newWidth, newHeight);
+	this->pixels = std::vector<glm::vec3>(newWidth * newHeight);
+	return true;
 }

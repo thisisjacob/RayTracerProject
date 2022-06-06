@@ -23,4 +23,6 @@ public:
 	const std::vector<glm::vec3>& getPixels();
 	int getWidth();
 	int getHeight();
+	// Updates the size of the image, resets the image data
+	bool refreshImage(int newWidth, int newHeight);
 };

@@ -7,7 +7,7 @@
 
 class MainInterface {
 public:
-	MainInterface(RayTracer rayTracer);
+	MainInterface(RayTracer& rayTracer);
 	~MainInterface();
 private:
 	GLFWwindow* window;

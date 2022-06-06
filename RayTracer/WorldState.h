@@ -19,9 +19,9 @@ public:
 	bool AddSurface(std::shared_ptr<Surface> surface);
 	bool AddLight(std::shared_ptr<Light> light);
 	bool SetCamera(Camera& camera);
-	const std::vector<std::shared_ptr<Surface>> GetSurfaces();
-	const std::vector<std::shared_ptr<Light>> GetLights();
-	const Camera GetCamera();
+	std::vector<std::shared_ptr<Surface>> GetSurfaces();
+	std::vector<std::shared_ptr<Light>> GetLights();
+	Camera GetCamera();
 	HitData GetIntersection(Ray ray);
 	HitData GetIntersection(Ray ray, float t0);
 };

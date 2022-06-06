@@ -4,6 +4,7 @@
 #include "IdealSpecular.h"
 #include "MainInterface.h"
 #include "Model.h"
+#include <thread>
 
 using std::shared_ptr;
 using std::make_shared;
@@ -53,14 +54,13 @@ int main() {
 
 	shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::vec3(-1.5, 0.0, 4.2), glm::vec3(0.4, 0.4, 0.4) });
 	shared_ptr<Light> newLight = shared_ptr<Light>(new Light{ glm::vec3(-4.0, 2.0, 0.5), glm::vec3(0.4, 0.4, 0.4) });
-	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::vec3(0.0, 0.0, 8.5), glm::vec3(0.4, 0.4, 0.4) });
-	world.AddLight(light);
-	world.AddLight(newLight);
+	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::vec3(0.0, 0.0, 8.5), glm::vec3(0.6, 0.6, 0.6) });
+	//world.AddLight(light);
+	//world.AddLight(newLight);
 	world.AddLight(backLight);
 	Camera camera = Camera(200, 200, 0.0, 0.0, 5.5, 1.0);
 	world.SetCamera(camera);
 	RayTracer ray(world);
-	ray.Render();
 	MainInterface mainUI(ray);
 
 	return 0;

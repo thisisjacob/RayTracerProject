@@ -21,5 +21,7 @@ public:
 	int GetImageHeight() const;
 	float GetFocalLength() const;
 	float GetAspectRatio() const;
+	// Updates the viewport size and aspect ratio
+	bool refreshImage(int newWidth, int newHeight);
 	// NOTE: Future versions could benefit from the addition of mutating functions
 };
