@@ -41,7 +41,7 @@ int main() {
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetSpecularCoeff(glm::vec3(0.7, 0.7, 0.7));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetAmbientCoeff(glm::vec3(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetDiffuseCoeff(glm::vec3(0.6, 0.6, 0.6));
-	//world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 5.0, shader1)));
+	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, mirrorShader)));
@@ -50,13 +50,13 @@ int main() {
 															glm::vec3(3.0, 2.0, -4.0),
 															glm::vec3(3.5, 5.0, -4.0),
 															shader1)));
-	world.AddSurface(shared_ptr<Surface>(new Model("./teapot.fbx", shader2)));
+	//world.AddSurface(shared_ptr<Surface>(new Model("./teapot.fbx", shader2)));
 
 	shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::vec3(-1.5, 0.0, 4.2), glm::vec3(0.4, 0.4, 0.4) });
 	shared_ptr<Light> newLight = shared_ptr<Light>(new Light{ glm::vec3(-4.0, 2.0, 0.5), glm::vec3(0.4, 0.4, 0.4) });
 	shared_ptr<Light> backLight = shared_ptr<Light>(new Light{ glm::vec3(0.0, 0.0, 8.5), glm::vec3(0.6, 0.6, 0.6) });
-	//world.AddLight(light);
-	//world.AddLight(newLight);
+	world.AddLight(light);
+	world.AddLight(newLight);
 	world.AddLight(backLight);
 	Camera camera = Camera(200, 200, 0.0, 0.0, 5.5, 1.0);
 	world.SetCamera(camera);

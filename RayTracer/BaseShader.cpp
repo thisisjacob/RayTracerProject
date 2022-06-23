@@ -27,7 +27,7 @@ glm::vec3 BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 		Ray shadowRay = Ray(surfacePoint, lVecUnit);
 		// Check for objects blocking light source
 		for (auto surface : world.GetSurfaces()) {
-			surface->IsHit(surface, shadowRay, EPSILON, shadowRecord.T, shadowRecord);
+			shadowRecord = surface->IsHit(surface, shadowRay, EPSILON, shadowRecord.T, shadowRecord);
 		}
 		// If light source is blocked at pixel, do not calculate effect of that light source on the pixel
 		if (!shadowRecord.IsHit) {

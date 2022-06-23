@@ -11,7 +11,7 @@ Sphere::Sphere(float u, float v, float w, float r, const shared_ptr<Material>& m
 	this->mat = mat;
 }
 
-bool Sphere::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
+HitData Sphere::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record) {
 	glm::vec3 eMinusc = ray.origin - center;
 
 	// Use quadratic formula to test discriminant for intersections
@@ -19,25 +19,29 @@ bool Sphere::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, floa
 	float B = 2.0 * dot(ray.dir, eMinusc);
 	float C = dot(eMinusc, eMinusc) - (r * r);
 	float discriminant = B * B - 4.0 * A * C;
-	if (discriminant < 0) return false;
+	if (discriminant < 0) return record;
 
 	float addT = (-B + sqrt(discriminant)) / (2.0 * A);
 	float minusT = (-B - sqrt(discriminant)) / (2.0 * A);
 
 	// MinusT is always the smaller T, so check it first
 	if (minusT > t0 && minusT < t1) {
-		record.T = minusT;
-		record.IsHit = true;
-		record.HitSurface = callingSurface;
-		return true;
+		HitData newRecord;
+		newRecord.IntersectingRay = record.IntersectingRay;
+		newRecord.T = minusT;
+		newRecord.IsHit = true;
+		newRecord.HitSurface = callingSurface;
+		return newRecord;
 	}
 	else if (addT > t0 && addT < t1) {
-		record.T = addT;
-		record.IsHit = true;
-		record.HitSurface = callingSurface;
-		return true;
+		HitData newRecord;
+		newRecord.IntersectingRay = record.IntersectingRay;
+		newRecord.T = addT;
+		newRecord.IsHit = true;
+		newRecord.HitSurface = callingSurface;
+		return newRecord;
 	}
-	return false;
+	return record;
 }
 
 BoundingBox Sphere::boundingBox() const {

@@ -34,15 +34,10 @@ HitData WorldState::GetIntersection(Ray ray) {
 	HitData hitData;
 	hitData.IsHit = false;
 	hitData.T = std::numeric_limits<float>::infinity();
+	hitData.IntersectingRay = ray;
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
-		//if (s == surfaces[3479])
-			//std::cout << " bad surface \n";
-		bool isHit = s->IsHit(s, ray, 0, hitData.T, hitData);
-		if (isHit) {
-			hitData.HitSurface = s;
-			hitData.IntersectingRay = ray;
-		}
+		hitData = s->IsHit(s, ray, 0, hitData.T, hitData);
 	}
 	return hitData;
 }
@@ -51,9 +46,10 @@ HitData WorldState::GetIntersection(Ray ray, float t0) {
 	HitData hitData;
 	hitData.IsHit = false;
 	hitData.T = std::numeric_limits<float>::infinity();
+	hitData.IntersectingRay = ray;
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
-		bool isHit = s->IsHit(s, ray, t0, hitData.T, hitData);
+		hitData = s->IsHit(s, ray, t0, hitData.T, hitData);
 	}
 	return hitData;
 }

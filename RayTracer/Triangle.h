@@ -12,7 +12,7 @@ private:
 	glm::vec3 cVertex;
 public:
 	Triangle(glm::vec3 aVert, glm::vec3 bVert, glm::vec3 cVert, const std::shared_ptr<Material>& mat);
-	bool IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record);
+	HitData IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record);
 	BoundingBox boundingBox() const;
 	glm::vec3 Color(HitData& hitData, WorldState& world);
 	glm::vec3 GetSurfaceNormal(HitData& hitData);

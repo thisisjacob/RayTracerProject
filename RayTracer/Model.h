@@ -18,7 +18,7 @@ public:
 	// Must point towards a 3D model file supported by ASSIMP
 	Model(std::string filePath, std::shared_ptr<Material> mat);
 	bool addMesh(Mesh& mesh);
-	bool IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record);
+	HitData IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record);
 	BoundingBox boundingBox() const;
 	glm::vec3 Color(HitData& hitData, WorldState& world);
 	glm::vec3 GetSurfaceNormal(HitData& hitData);

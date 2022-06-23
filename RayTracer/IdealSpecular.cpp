@@ -26,7 +26,7 @@ glm::vec3 IdealSpecular::Shading(HitData& hitData, WorldState& world) {
 		Ray shadowRay = Ray(surfacePoint, lVecUnit);
 		// Adds shading from a light source if not in shadow
 		for (auto surface : world.GetSurfaces()) {
-			surface->IsHit(surface, shadowRay, EPSILON, shadowRecord.T, shadowRecord);
+			shadowRecord = surface->IsHit(surface, shadowRay, EPSILON, shadowRecord.T, shadowRecord);
 		}
 		if (!shadowRecord.IsHit) {
 			// Calculate diffuse lighting

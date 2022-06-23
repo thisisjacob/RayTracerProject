@@ -12,8 +12,10 @@ class Material;
 class Surface {
 public:
 	std::shared_ptr<Material> mat;
-	// Tests if object is hit, updates HitData information on hit surface if new surface is closer to the camera
-	virtual bool IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) = 0;
+	// Checks if an object is hit by the ray, and closer to the starting position
+	// Returns a new HitData if this is the case
+	// The passed record is returned if it is not
+	virtual HitData IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record) = 0;
 	// Object for creating a bounding box of the given surface
 	virtual BoundingBox boundingBox() const = 0;
 	// Called after IsHit

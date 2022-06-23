@@ -7,9 +7,9 @@ Triangle::Triangle(glm::vec3 aVert, glm::vec3 bVert, glm::vec3 cVert, const std:
 	this->mat = mat;
 }
 
-bool Triangle::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
+HitData Triangle::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record) {
 	// Checks for if the triangle is degenerate, to prevent hits on it
-	if ((aVertex == bVertex) || (aVertex == cVertex) || (cVertex == bVertex)) { return false; }
+	if ((aVertex == bVertex) || (aVertex == cVertex) || (cVertex == bVertex)) { return record; }
 
 	glm::mat3x3 A;
 	A[0] = glm::vec3(aVertex.x - bVertex.x, aVertex.x - cVertex.x, ray.dir.x);
@@ -24,17 +24,21 @@ bool Triangle::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, fl
 	float M = A[0][0] * eiMinHf + A[1][0] * gfMinDi + A[2][0] * dhMinEg;
 	float t = -(A[2][1] * (A[0][0] * k - j * A[1][0]) + A[1][1] * (j * A[2][0] - A[0][0] * l) + A[0][1] * (A[1][0] * l - k * A[2][0])) / M;
 	if (t < t0 || t > t1)
-		return false;
+		return record;
 	float gamma = (A[2][2] * (A[0][0] * k - j * A[1][0]) + A[1][2] * (j * A[2][0] - A[0][0] * l) + A[0][2] * (A[1][0] * l - k * A[2][0])) / M;
 	if (gamma < 0.0 || gamma > 1.0)
-		return false;
+		return record;
 	float beta = (j * eiMinHf + k * gfMinDi + l * dhMinEg) / M;
 	if (beta < 0.0 || beta > 1 - gamma)
-		return false;
-	record.T = t;
-	record.IsHit = true;
-	record.HitSurface = callingSurface;
-	return true;
+		return record;
+
+	// Surface hit and is closer, so return new values
+	HitData newRecord;
+	newRecord.IntersectingRay = record.IntersectingRay;
+	newRecord.T = t;
+	newRecord.IsHit = true;
+	newRecord.HitSurface = callingSurface;
+	return newRecord;
 };
 
 BoundingBox Triangle::boundingBox() const {

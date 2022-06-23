@@ -13,11 +13,11 @@ bool Model::addMesh(Mesh& mesh) {
 	return true;
 }
 
-bool Model::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, HitData& record) {
-	bool res = false;
+HitData Model::IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record) {
+	HitData res = record;
 	for (const Mesh& mesh : meshes) {
 		for (auto surface : mesh.surfaces) {
-			res = res || surface->IsHit(surface, ray, t0, record.T, record);
+			res = surface->IsHit(surface, ray, t0, record.T, record);
 		}
 	}
 	return res;
