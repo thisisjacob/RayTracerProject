@@ -9,6 +9,9 @@ class MainInterface {
 public:
 	MainInterface(RayTracer& rayTracer);
 	~MainInterface();
+	bool startInterface(RayTracer& rayTracer);
 private:
+	Shader shader;
+	GLuint screenVAO, screenVBO, tex;
 	GLFWwindow* window;
 };

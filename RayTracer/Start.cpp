@@ -62,6 +62,12 @@ int main() {
 	world.SetCamera(camera);
 	RayTracer ray(world);
 	MainInterface mainUI(ray);
+	// Begin rendering raytraced image
+	std::thread rtThread(&RayTracer::Render, &ray);
+	//std::thread uiThread(&MainInterface::startInterface, &mainUI, &ray);
+	mainUI.startInterface(ray);
+	rtThread.join();
+	//uiThread.join();
 
 	return 0;
 }

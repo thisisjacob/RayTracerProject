@@ -38,7 +38,6 @@ MainInterface::MainInterface(RayTracer& rayTracer) {
 	glViewport(0, 0, rayTracer.getWidth(), rayTracer.getHeight());
 	glDebugMessageCallback(messageCallback, nullptr);
 
-	unsigned int screenVAO, screenVBO;
 	glCreateBuffers(1, &screenVBO);
 	glNamedBufferStorage(screenVBO, sizeof(renderQuads), &renderQuads, GL_DYNAMIC_STORAGE_BIT);
 
@@ -54,26 +53,26 @@ MainInterface::MainInterface(RayTracer& rayTracer) {
 	glVertexArrayAttribBinding(screenVAO, 0, 0);
 	glVertexArrayAttribBinding(screenVAO, 1, 0);
 
-	unsigned int tex;
 	glActiveTexture(GL_TEXTURE0);
 	glCreateTextures(GL_TEXTURE_2D, 1, &tex);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rayTracer.getWidth(), rayTracer.getHeight(), 0, GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	Shader shader;
 	shader.AddShader("Vertex.glsl", GL_VERTEX_SHADER);
 	shader.AddShader("Fragment.glsl", GL_FRAGMENT_SHADER);
 	shader.BuildProgram();
 	shader.UseProgram();
 	shader.ModifyUniform("screenTexture", 0);
+}
 
-	// Begin rendering raytraced image
-	rayTracer.Render();
+MainInterface::~MainInterface() {
+	glfwTerminate();
+}
 
+bool MainInterface::startInterface(RayTracer& rayTracer) {
 	while (!glfwWindowShouldClose(window)) {
 		// Get updated texture
-		//glTexSubImage2D(GL_TEXTURE_2D, tex, 0, 0, rayTracer.getWidth(), rayTracer.getHeight(), GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rayTracer.getWidth(), rayTracer.getHeight(), 0, GL_RGB, GL_FLOAT, rayTracer.getPixels().data());
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -87,15 +86,12 @@ MainInterface::MainInterface(RayTracer& rayTracer) {
 		glfwPollEvents();
 	}
 	// Window closed, preform cleanup and end the program
+
 	glfwTerminate();
 	glDeleteBuffers(1, &screenVBO);
 	glDeleteBuffers(1, &screenVAO);
 	glDeleteTextures(1, &tex);
 	exit(0);
-}
-
-MainInterface::~MainInterface() {
-	glfwTerminate();
 }
 
 void glfwErrorCallback(int error, const char* description) {

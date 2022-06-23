@@ -15,8 +15,10 @@ class RayTracer {
 private:
 	WorldState world;
 	std::vector<glm::vec3> pixels;
-	void calculatePixel(const Camera& cam, int xPixel, int yPixel);
-	void calculatePixels(const Camera& cam, int startYPixel, int endYPixel);
+	void calculatePixel(int xPixel, int yPixel);
+	void calculatePixels(int startYPixel, int endYPixel);
+	void calculateRow(int row);
+	void calculateColumn(int col);
 public:
 	RayTracer(WorldState world);
 	bool Render();

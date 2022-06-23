@@ -4,7 +4,8 @@ RayTracer::RayTracer(WorldState world) : pixels(world.GetCamera().GetImageHeight
 	this->world = world;
 }
 
-void RayTracer::calculatePixel(const Camera& cam, int xPixel, int yPixel) {
+void RayTracer::calculatePixel(int xPixel, int yPixel) {
+	const Camera& cam = world.GetCamera();
 	Ray ray = Ray(cam.GetEye(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
 	HitData hitData = world.GetIntersection(ray);
 
@@ -21,12 +22,25 @@ void RayTracer::calculatePixel(const Camera& cam, int xPixel, int yPixel) {
 	}
 }
 
-void RayTracer::calculatePixels(const Camera& cam, int startYPixel, int endYPixel) {
+void RayTracer::calculatePixels(int startYPixel, int endYPixel) {
+	const Camera& cam = world.GetCamera();
 	for (int y = startYPixel; y < endYPixel; y++) {
 		for (int x = 0; x < cam.GetImageWidth(); x++) {
-			calculatePixel(cam, x, y);
+			calculatePixel(x, y);
 		}
 		std::cout << "Row: " << y << " Complete\n";
+	}
+}
+
+void RayTracer::calculateRow(int row) {
+	for (int i = 0; i < this->getWidth(); i++) {
+		// calculate pixel
+	}
+}
+
+void RayTracer::calculateColumn(int column) {
+	for (int i = 0; i < this->getHeight(); i++) {
+		// calculate pixel
 	}
 }
 
@@ -36,7 +50,7 @@ bool RayTracer::Render() {
 	int xPos = 0;
 	int i = 0;
 	// Get processor concurrency information
-	const auto PROCESSOR_COUNT = std::thread::hardware_concurrency();
+	const auto PROCESSOR_COUNT = std::thread::hardware_concurrency() - 1;
 	std::cout << "Concurrent Threads Allowed: " << PROCESSOR_COUNT << "\n";
 	// Only one thread allowed, or information not available
 	// Run without multithreading
@@ -44,7 +58,7 @@ bool RayTracer::Render() {
 		std::cout << "Multithreading disabled.\n";	
 		for (int y = 0; y < camera.GetImageHeight(); y++) {
 			for (int x = 0; x < camera.GetImageWidth(); x++) {
-				calculatePixel(camera, x, y);
+				calculatePixel(x, y);
 			}
 		}
 	}
@@ -53,7 +67,7 @@ bool RayTracer::Render() {
 		std::vector<std::thread> threads;
 		const int ROWS_PER_THREAD = camera.GetImageHeight() / PROCESSOR_COUNT;
 		for (int i = 0; i < PROCESSOR_COUNT; i++) {
-			threads.push_back(std::thread(&RayTracer::calculatePixels, this, std::ref(camera), i * ROWS_PER_THREAD, (i + 1) * ROWS_PER_THREAD));
+			threads.push_back(std::thread(&RayTracer::calculatePixels, this, i * ROWS_PER_THREAD, (i + 1) * ROWS_PER_THREAD));
 			std::cout << "Thread Count: " << threads.size() << "\n";
 		}
 		for (std::thread& thread : threads) { thread.join(); }
