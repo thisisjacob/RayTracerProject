@@ -80,6 +80,12 @@
     <ClCompile Include="RayTracer.cpp">
       <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RTImage.cpp">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Surface.h">
@@ -131,6 +137,12 @@
       <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClInclude>
     <ClInclude Include="RayTracer.h">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RTImage.h">
       <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClInclude>
   </ItemGroup>

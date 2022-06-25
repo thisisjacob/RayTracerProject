@@ -13,7 +13,7 @@ bool WorldState::AddLight(const std::shared_ptr<Light> light) {
 	return true;
 }
 
-bool WorldState::SetCamera(Camera& camera) {
+bool WorldState::SetCamera(Camera camera) {
 	this->camera = camera;
 	return true;
 }
@@ -26,7 +26,7 @@ std::vector<std::shared_ptr<Light>> WorldState::GetLights() {
 	return lights;
 }
 
-Camera WorldState::GetCamera() {
+Camera WorldState::GetCamera() const {
 	return camera;
 }
 

@@ -18,10 +18,10 @@ public:
 	// After these objects have been added to WorldState, they should not be modified outside of WorldState
 	bool AddSurface(std::shared_ptr<Surface> surface);
 	bool AddLight(std::shared_ptr<Light> light);
-	bool SetCamera(Camera& camera);
+	bool SetCamera(Camera camera);
 	std::vector<std::shared_ptr<Surface>> GetSurfaces();
 	std::vector<std::shared_ptr<Light>> GetLights();
-	Camera GetCamera();
+	Camera GetCamera() const;
 	HitData GetIntersection(Ray ray);
 	HitData GetIntersection(Ray ray, float t0);
 };

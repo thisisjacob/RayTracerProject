@@ -1,7 +1,11 @@
 #include "RayTracer.h"
 
-RayTracer::RayTracer(WorldState world) : pixels(world.GetCamera().GetImageHeight() * world.GetCamera().GetImageWidth()) {
+RayTracer::RayTracer(WorldState world) : image(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight()) {
 	this->world = world;
+}
+
+RayTracer::RayTracer() {
+
 }
 
 void RayTracer::calculatePixel(int xPixel, int yPixel) {
@@ -14,11 +18,11 @@ void RayTracer::calculatePixel(int xPixel, int yPixel) {
 		// Found closest object, determine shading and send to file
 		glm::vec3 color = hitData.HitSurface->Color(hitData, world);
 		//std::cout << color.x << " " << color.y << " " << color.z << "\n";
-		pixels[yPixel * cam.GetImageWidth() + xPixel] = color;
+		image.pixels[yPixel * cam.GetImageWidth() + xPixel] = color;
 		//pixels[yPixel * cam.GetImageWidth() + xPixel] = hitData.HitSurface->GetIntersectionPoint(hitData);
 	}
 	else {
-		pixels[yPixel * cam.GetImageWidth() + xPixel] = glm::vec3(0.207, 0.318, 0.361);
+		image.pixels[yPixel * cam.GetImageWidth() + xPixel] = glm::vec3(0.207, 0.318, 0.361);
 	}
 }
 
@@ -46,6 +50,7 @@ void RayTracer::calculateColumn(int column) {
 
 bool RayTracer::Render() {
 	const Camera camera = world.GetCamera();
+	image.erasePixels();
 	int yPos = 0;
 	int xPos = 0;
 	int i = 0;
@@ -59,6 +64,7 @@ bool RayTracer::Render() {
 		for (int y = 0; y < camera.GetImageHeight(); y++) {
 			for (int x = 0; x < camera.GetImageWidth(); x++) {
 				calculatePixel(x, y);
+				std::cout << "x: " << x << " y: " << y << "\n";
 			}
 		}
 	}
@@ -76,7 +82,7 @@ bool RayTracer::Render() {
 	return true;
 }
 
-const std::vector<glm::vec3>& RayTracer::getPixels() { return pixels; }
+const std::vector<glm::vec3>& RayTracer::getPixels() { return image.pixels; }
 
 int RayTracer::getWidth() {
 	return world.GetCamera().GetImageWidth();
@@ -88,6 +94,12 @@ int RayTracer::getHeight() {
 
 bool RayTracer::refreshImage(int newWidth, int newHeight) {
 	this->world.GetCamera().refreshImage(newWidth, newHeight);
-	this->pixels = std::vector<glm::vec3>(newWidth * newHeight);
+	image.resizePixels(newWidth, newHeight);
+	return true;
+}
+
+bool RayTracer::setWorld(const WorldState& newWorld) {
+	this->world = newWorld;
+	image.resizePixels(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight());
 	return true;
 }

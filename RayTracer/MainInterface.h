@@ -4,12 +4,13 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Shader.h"
+#include "RTImage.h"
 
 class MainInterface {
 public:
-	MainInterface(RayTracer& rayTracer);
+	MainInterface(int screenWidth, int screenHeight);
 	~MainInterface();
-	bool startInterface(RayTracer& rayTracer);
+	bool startInterface(RTImage& image);
 private:
 	Shader shader;
 	GLuint screenVAO, screenVBO, tex;
