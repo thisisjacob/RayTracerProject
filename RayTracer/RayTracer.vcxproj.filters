@@ -1,32 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Surfaces">
-      <UniqueIdentifier>{342e3627-ca82-4a4b-a1c5-ca4a75548aeb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{a651c60f-e971-48fb-9813-a2519767cb8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Surfaces\Geometric">
-      <UniqueIdentifier>{fcd23cbf-8628-4e3c-89e3-8ad8e3415a45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Surfaces\Materials">
-      <UniqueIdentifier>{9f4109dc-1d15-445f-a611-86e86027dc50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World">
-      <UniqueIdentifier>{55bc119c-1572-42dd-a41b-1a5420a53316}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI/OpenGL">
       <UniqueIdentifier>{ef99219f-0889-4132-a403-3d06088ed763}</UniqueIdentifier>
@@ -34,34 +14,53 @@
     <Filter Include="UI/OpenGL\ShaderFiles">
       <UniqueIdentifier>{59445f47-e975-4f78-aac4-1ba4094a8dfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RayTracer">
+      <UniqueIdentifier>{bd12890d-30e0-4f83-b6ce-bab975dbf44c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="RayTracer\Surfaces">
+      <UniqueIdentifier>{342e3627-ca82-4a4b-a1c5-ca4a75548aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\Surfaces\Geometric">
+      <UniqueIdentifier>{fcd23cbf-8628-4e3c-89e3-8ad8e3415a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\Surfaces\Materials">
+      <UniqueIdentifier>{9f4109dc-1d15-445f-a611-86e86027dc50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\Surfaces\Model">
+      <UniqueIdentifier>{d1738454-9170-4eaf-8ef6-fe91083c336b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\World">
+      <UniqueIdentifier>{55bc119c-1572-42dd-a41b-1a5420a53316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\RayTracerAlgo">
+      <UniqueIdentifier>{7d9f7a35-0723-4e81-b00c-e92084dbc5a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RayTracer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
     </ClCompile>
     <ClCompile Include="WorldState.cpp">
-      <Filter>World</Filter>
+      <Filter>RayTracer\World</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>World</Filter>
+      <Filter>RayTracer\World</Filter>
     </ClCompile>
     <ClCompile Include="BaseShader.cpp">
-      <Filter>Surfaces\Materials</Filter>
+      <Filter>RayTracer\Surfaces\Materials</Filter>
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
     </ClCompile>
     <ClCompile Include="IdealSpecular.cpp">
-      <Filter>Surfaces\Materials</Filter>
+      <Filter>RayTracer\Surfaces\Materials</Filter>
     </ClCompile>
     <ClCompile Include="MainInterface.cpp">
       <Filter>UI/OpenGL</Filter>
@@ -70,54 +69,81 @@
       <Filter>UI/OpenGL\ShaderFiles</Filter>
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>RayTracer\Surfaces\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTracer.cpp">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RTImage.cpp">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RayTracer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Surface.h">
-      <Filter>Surfaces</Filter>
+      <Filter>RayTracer\Surfaces</Filter>
     </ClInclude>
     <ClInclude Include="HitData.h">
-      <Filter>Surfaces</Filter>
+      <Filter>RayTracer\Surfaces</Filter>
     </ClInclude>
     <ClInclude Include="MathFunctions.h">
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>Surfaces</Filter>
+      <Filter>RayTracer\Surfaces</Filter>
     </ClInclude>
     <ClInclude Include="WorldState.h">
-      <Filter>World</Filter>
+      <Filter>RayTracer\World</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">
-      <Filter>World</Filter>
+      <Filter>RayTracer\World</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>World</Filter>
+      <Filter>RayTracer\World</Filter>
     </ClInclude>
     <ClInclude Include="BaseShader.h">
-      <Filter>Surfaces\Materials</Filter>
+      <Filter>RayTracer\Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
     </ClInclude>
     <ClInclude Include="IdealSpecular.h">
-      <Filter>Surfaces\Materials</Filter>
+      <Filter>RayTracer\Surfaces\Materials</Filter>
     </ClInclude>
     <ClInclude Include="MainInterface.h">
       <Filter>UI/OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
-      <Filter>Surfaces\Geometric</Filter>
+      <Filter>RayTracer\Surfaces\Geometric</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>RayTracer\Surfaces\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>RayTracer\Surfaces\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTracer.h">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RTImage.h">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

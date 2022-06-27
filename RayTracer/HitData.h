@@ -5,6 +5,7 @@
 
 class Surface;
 
+// Holds information on an intersection with an object
 struct HitData {
 	bool IsHit;
 	float T;

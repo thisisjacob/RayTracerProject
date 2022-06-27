@@ -13,20 +13,20 @@ bool WorldState::AddLight(const std::shared_ptr<Light> light) {
 	return true;
 }
 
-bool WorldState::SetCamera(Camera& camera) {
+bool WorldState::SetCamera(Camera camera) {
 	this->camera = camera;
 	return true;
 }
 
-const std::vector<std::shared_ptr<Surface>> WorldState::GetSurfaces() {
+std::vector<std::shared_ptr<Surface>> WorldState::GetSurfaces() {
 	return surfaces;
 }
 
-const std::vector<std::shared_ptr<Light>> WorldState::GetLights() {
+std::vector<std::shared_ptr<Light>> WorldState::GetLights() {
 	return lights;
 }
 
-const Camera WorldState::GetCamera() {
+Camera WorldState::GetCamera() const {
 	return camera;
 }
 
@@ -34,16 +34,10 @@ HitData WorldState::GetIntersection(Ray ray) {
 	HitData hitData;
 	hitData.IsHit = false;
 	hitData.T = std::numeric_limits<float>::infinity();
+	hitData.IntersectingRay = ray;
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
-		bool isHit = (*s).IsHit(ray, 0, hitData.T, hitData);
-		if (isHit) {
-			hitData.HitSurface = s;
-			if (!hitData.HitSurface) {
-				int i = 0;
-			}
-			hitData.IntersectingRay = ray;
-		}
+		hitData = s->IsHit(s, ray, 0, hitData.T, hitData);
 	}
 	return hitData;
 }
@@ -52,13 +46,10 @@ HitData WorldState::GetIntersection(Ray ray, float t0) {
 	HitData hitData;
 	hitData.IsHit = false;
 	hitData.T = std::numeric_limits<float>::infinity();
+	hitData.IntersectingRay = ray;
 	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
-		bool isHit = (*s).IsHit(ray, t0, hitData.T, hitData);
-		if (isHit) {
-			hitData.HitSurface = s;
-			hitData.IntersectingRay = ray;
-		}
+		hitData = s->IsHit(s, ray, t0, hitData.T, hitData);
 	}
 	return hitData;
 }

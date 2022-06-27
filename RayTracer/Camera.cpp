@@ -43,3 +43,10 @@ float Camera::GetFocalLength() const {
 float Camera::GetAspectRatio() const {
 	return aspectRatio;
 }
+
+bool Camera::refreshImage(int newWidth, int newHeight) {
+	this->imageWidth = newWidth;
+	this->imageHeight = newHeight;
+	this->aspectRatio = (float)newWidth / (float)newHeight;
+	return true;
+}
