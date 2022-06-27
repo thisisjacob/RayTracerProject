@@ -16,7 +16,7 @@ class RayTracer {
 private:
 	WorldState world;
 	void calculatePixel(int xPixel, int yPixel);
-	void calculatePixels(int startYPixel, int endYPixel);
+	void calculateRows(int startRow, int endRow);
 	void calculateRow(int row);
 	void calculateColumn(int col);
 public:
