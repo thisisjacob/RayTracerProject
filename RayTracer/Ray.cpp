@@ -5,12 +5,12 @@ Ray::Ray() {
 	dir = glm::vec3();
 }
 
-Ray::Ray(glm::vec3 origin, float u, float v, float w) {
-	this->origin = glm::vec3(origin);
-	dir = glm::vec3(u, v, w);
-}
-
 Ray::Ray(const glm::vec3 &origin, const glm::vec3 &dir) {
 	this->origin = glm::vec3(origin);
 	this->dir = glm::vec3(dir);
+}
+
+Ray::Ray(const glm::vec3& origin, const glm::vec3& dir, float u, float v, float focalLength) {
+	this->origin = glm::vec3(origin);
+	this->dir = glm::vec3((dir.x * focalLength) + u, (dir.y * focalLength) + v, dir.z * focalLength);
 }

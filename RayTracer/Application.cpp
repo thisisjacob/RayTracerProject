@@ -14,7 +14,7 @@ bool Application::loadState(std::string filePath) {
 }
 
 bool Application::loadTestState() {
-	world.SetCamera(Camera(500, 500, 0.0, 0.0, 5.5, 1.0));
+	world.SetCamera(Camera(500, 500, glm::vec3(0.0, 0.0, 8.5), glm::vec3(0.0, 0.0, -1.0), 1.0));
 	shared_ptr<Material> shader1 = make_shared<BlinnPhong>();
 	dynamic_pointer_cast<BlinnPhong>(shader1)->SetDiffuseCoeff(glm::vec3(0.7, 0.2, 0.2));
 	dynamic_pointer_cast<BlinnPhong>(shader1)->SetAmbientCoeff(glm::vec3(0.7, 0.2, 0.2));

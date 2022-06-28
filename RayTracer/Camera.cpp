@@ -8,12 +8,16 @@ Camera::Camera() {
 	eye = glm::vec3(0.0, 0.0, 0.0);
 }
 
-Camera::Camera(int imageWidth, int imageHeight, float u, float v, float w, float focalLength) {
+Camera::Camera(int imageWidth, int imageHeight, glm::vec3 eyePos, glm::vec3 dir, float focalLength) {
+	// Must have a valid direction
+	assert(glm::length(dir) > 0.0);
 	this->imageWidth = imageWidth;
 	this->imageHeight = imageHeight;
-	this->focalLength = focalLength;
-	aspectRatio = (float)imageWidth / (float)imageHeight;
-	eye = glm::vec3(u, v, w);
+	// Ensure focal length matches the direction of the passed dir
+	this->focalLength = abs(focalLength);
+	this->aspectRatio = (float)imageWidth / (float)imageHeight;
+	this->eye = glm::vec3(eyePos);
+	this->dir = glm::normalize(dir);
 }
 
 float Camera::GetUValue(int xPixel) const {
@@ -24,8 +28,12 @@ float Camera::GetVValue(int yPixel) const {
 	return 0.5 - (1.0 / imageHeight) * (float)(yPixel);
 }
 
-const glm::vec3 Camera::GetEye() const {
+glm::vec3 Camera::getEye() const {
 	return eye;
+}
+
+glm::vec3 Camera::getDir() const {
+	return dir;
 }
 
 int  Camera::GetImageWidth() const {
@@ -44,7 +52,7 @@ float Camera::GetAspectRatio() const {
 	return aspectRatio;
 }
 
-bool Camera::refreshImage(int newWidth, int newHeight) {
+bool Camera::resizeImagePlane(int newWidth, int newHeight) {
 	this->imageWidth = newWidth;
 	this->imageHeight = newHeight;
 	this->aspectRatio = (float)newWidth / (float)newHeight;
