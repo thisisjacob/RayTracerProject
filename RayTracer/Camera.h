@@ -9,19 +9,22 @@ private:
 	float focalLength;
 	float aspectRatio;
 	glm::vec3 eye;
+	glm::vec3 dir;
 public:
 	Camera();
-	Camera(int imageWidth, int imageHeight, float u, float v, float w, float focalLength);
-	// Generates vectors holding each U and V component of the perspective vectors
-	// This can be used for the main ray tracing loop
+	// Sets up a campera positioned at eyePos, pointing towards dir
+	Camera(int imageWidth, int imageHeight, glm::vec3 eyePos, glm::vec3 dir, float focalLength);
+	// Generates x/y offsets used from generating rays from the camera position that point towards pixels on the image plane
+	// U is the x offset, V is the y offset
 	float GetUValue(int xPixel) const;
 	float GetVValue(int yPixel) const;
-	const glm::vec3 GetEye() const;
+	glm::vec3 getEye() const;
+	glm::vec3 getDir() const;
 	int GetImageWidth() const;
 	int GetImageHeight() const;
+	// Distance of the image plane from the camera position
 	float GetFocalLength() const;
 	float GetAspectRatio() const;
 	// Updates the viewport size and aspect ratio
-	bool refreshImage(int newWidth, int newHeight);
-	// NOTE: Future versions could benefit from the addition of mutating functions
+	bool resizeImagePlane(int newWidth, int newHeight);
 };

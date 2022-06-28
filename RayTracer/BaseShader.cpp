@@ -34,7 +34,7 @@ glm::vec3 BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 			// Calculate diffuse lighting
 			lightCalc += intensity * diffuseCoeff * std::max(0.0f, glm::dot(unitNormal, lVecUnit));
 			// Calculate specular lighting
-			glm::vec3 vVecUnit = world.GetCamera().GetEye() - surfacePoint;
+			glm::vec3 vVecUnit = world.GetCamera().getEye() - surfacePoint;
 			vVecUnit = glm::normalize(vVecUnit);
 			glm::vec3 h = vVecUnit + lVecUnit;
 			h = vVecUnit + lVecUnit;

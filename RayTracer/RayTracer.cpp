@@ -11,7 +11,9 @@ RayTracer::RayTracer() {
 // Calculates a single pixel of the raytraced image, storing the result in the image data
 void RayTracer::calculatePixel(int xPixel, int yPixel) {
 	const Camera& cam = world.GetCamera();
-	Ray ray = Ray(cam.GetEye(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
+	//Ray ray = Ray(cam.getEye(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
+	//Ray ray = Ray(cam.getEye(), cam.getDir(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
+	Ray ray = Ray(cam.getEye(), cam.getDir(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), cam.GetFocalLength());
 	HitData hitData = world.GetIntersection(ray);
 
 	// Writing color data to file
@@ -92,7 +94,7 @@ int RayTracer::getHeight() {
 
 // Clears image, resizes it
 bool RayTracer::refreshImage(int newWidth, int newHeight) {
-	this->world.GetCamera().refreshImage(newWidth, newHeight);
+	this->world.GetCamera().resizeImagePlane(newWidth, newHeight);
 	image.resizePixels(newWidth, newHeight);
 	return true;
 }
@@ -100,6 +102,6 @@ bool RayTracer::refreshImage(int newWidth, int newHeight) {
 // Changes the world used to generate the raytraced image, and resets the image data
 bool RayTracer::setWorld(const WorldState& newWorld) {
 	this->world = newWorld;
-	image.resizePixels(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight());
+	this->refreshImage(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight());
 	return true;
 }
