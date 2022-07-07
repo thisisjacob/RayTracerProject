@@ -5,6 +5,10 @@
 #include <vector>
 #include "Camera.h"
 #include <iostream>
+#include "HitData.h";
+
+class Surface;
+class HitData;
 
 // Holds all of the surfaces and lights to be used by the Ray Tracer
 // This should be used whenever information about the world is needed

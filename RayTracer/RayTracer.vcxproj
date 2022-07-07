@@ -147,9 +147,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="IdealSpecular.cpp" />
     <ClCompile Include="MainInterface.cpp" />
+    <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayFunctions.cpp" />
     <ClCompile Include="RayTracer.cpp" />
+    <ClCompile Include="RefractionShader.cpp" />
     <ClCompile Include="RTImage.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -171,7 +174,9 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayFunctions.h" />
     <ClInclude Include="RayTracer.h" />
+    <ClInclude Include="RefractionShader.h" />
     <ClInclude Include="RTImage.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Surface.h" />

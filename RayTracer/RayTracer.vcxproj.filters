@@ -86,6 +86,15 @@
     <ClCompile Include="RTImage.cpp">
       <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClCompile>
+    <ClCompile Include="RefractionShader.cpp">
+      <Filter>RayTracer\Surfaces\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="RayFunctions.cpp">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClCompile>
+    <ClCompile Include="MathFunctions.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Surface.h">
@@ -143,6 +152,12 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="RTImage.h">
+      <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClInclude>
+    <ClInclude Include="RefractionShader.h">
+      <Filter>RayTracer\Surfaces\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="RayFunctions.h">
       <Filter>RayTracer\RayTracerAlgo</Filter>
     </ClInclude>
   </ItemGroup>

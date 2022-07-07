@@ -9,7 +9,12 @@ IdealSpecular::IdealSpecular() {
 	matType = MaterialType::REFLECTIVE;
 }
 
-glm::vec3 IdealSpecular::Shading(HitData& hitData, WorldState& world) {
+glm::vec3 IdealSpecular::Shading(HitData& hitData, WorldState& world, int currRecurDepth) {
+	// Recursion limit reached, so end the recursion
+	if (recursionLimitHit(currRecurDepth)) {
+		return glm::vec3(0, 0, 0);
+	}
+
 	glm::vec3 unitNormal = hitData.HitSurface.get()->GetUnitSurfaceNormal(hitData);
 	glm::vec3 surfacePoint = hitData.HitSurface.get()->GetIntersectionPoint(hitData);
 	glm::vec3 lightCalc = glm::vec3(0.0);
@@ -33,10 +38,17 @@ glm::vec3 IdealSpecular::Shading(HitData& hitData, WorldState& world) {
 			lightCalc += intensity * diffuseCoeff * std::max(0.0f, glm::dot(unitNormal, lVecUnit));
 		}
 	}
-	// Calculating reflection ray and reflection shading
-	glm::vec3 r = glm::normalize(hitData.IntersectingRay.dir - 2 * (glm::dot(hitData.IntersectingRay.dir, unitNormal)) * unitNormal);
-	lightCalc += RecursiveShading(Ray(surfacePoint, r), world, 0);
-	return glm::vec3(Clamp(lightCalc.x, 0.0f, 1.0f), Clamp(lightCalc.y, 0.0f, 1.0f), Clamp(lightCalc.z, 0.0f, 1.0f));
+	// Get reflections from other surfaces
+	Ray reflectedRay = reflectRay(hitData);
+	HitData reflectedHit = world.GetIntersection(reflectedRay, EPSILON);
+	if (reflectedHit.IsHit) {
+		lightCalc += specularCoeff * reflectedHit.HitSurface->Color(reflectedHit, world, ++currRecurDepth);
+	}
+	return clampVec3Color(lightCalc);
+}
+
+glm::vec3 IdealSpecular::shadeReflectedColor(glm::vec3 reflectedColor) {
+	return reflectedColor * specularCoeff;
 }
 
 glm::vec3 IdealSpecular::RecursiveShading(Ray ray, WorldState& world, int currIter) {
@@ -50,11 +62,8 @@ glm::vec3 IdealSpecular::RecursiveShading(Ray ray, WorldState& world, int currIt
 		return color * specularCoeff;
 	}
 	else if (hit.HitSurface->mat->matType == MaterialType::REFLECTIVE) { // Reflective surface, recurse reflection
-		glm::vec3 norm = hit.HitSurface->GetUnitSurfaceNormal(hit);
-		glm::vec3 d = glm::normalize(hit.IntersectingRay.dir);
-		glm::vec3 r = glm::normalize(d - 2 * (glm::dot(d, norm)) * norm);
-		glm::vec3 p = hit.HitSurface->GetIntersectionPoint(hit);
-		return color * specularCoeff + specularCoeff * RecursiveShading(Ray(p, r), world, currIter + 1);
+		Ray reflectedRay = reflectRay(hit);
+		return color * specularCoeff + specularCoeff * RecursiveShading(reflectedRay, world, currIter + 1);
 	}
 	return color;
 }

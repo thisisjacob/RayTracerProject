@@ -2,7 +2,10 @@
 #include "WorldState.h"
 #include "RayTracer.h"
 #include "MainInterface.h"
-
+#include "BaseShader.h"
+#include "IdealSpecular.h"
+#include "Model.h"
+#include "RefractionShader.h"
 
 using std::shared_ptr;
 using std::make_shared;

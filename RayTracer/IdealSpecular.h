@@ -1,8 +1,7 @@
 #pragma once
 #include "Material.h"
 #include "MathFunctions.h"
-
-
+#include "RayFunctions.h"
 
 // Maximum number of recursions calling the RecursiveShading function
 // This is needed in order to prevent infinite recursion when there are several reflective materials
@@ -18,9 +17,10 @@ private:
 	float phongExponent;
 public:
 	IdealSpecular();
-	glm::vec3 Shading(HitData& hitData, WorldState& world);
+	glm::vec3 Shading(HitData& hitData, WorldState& world, int currRecurDepth);
 	// Called to recursively calculate shading in the event of several reflections
 	glm::vec3 RecursiveShading(Ray ray, WorldState& world, int currIter);
+	glm::vec3 shadeReflectedColor(glm::vec3 reflectedColor);
 	bool SetAmbientCoeff(glm::vec3 newAmbient);
 	bool SetAmbientIntensity(glm::vec3 newIntensity);
 	bool SetDiffuseCoeff(glm::vec3 newDiffuse);

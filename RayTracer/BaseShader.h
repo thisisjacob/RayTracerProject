@@ -11,7 +11,7 @@ private:
 	float phongExponent;
 public:
 	BlinnPhong();
-	glm::vec3 Shading(HitData& hitData, WorldState& world);
+	glm::vec3 Shading(HitData& hitData, WorldState& world, int currRecurDepth);
 	bool SetAmbientCoeff(glm::vec3 newAmbient);
 	bool SetAmbientIntensity(glm::vec3 newIntensity);
 	bool SetDiffuseCoeff(glm::vec3 newDiffuse);

@@ -1,7 +1,4 @@
 #include "Application.h"
-#include "BaseShader.h"
-#include "IdealSpecular.h"
-#include "Model.h"
 
 Application::Application() : world{}, rt{ } { }
 
@@ -43,6 +40,7 @@ bool Application::loadTestState() {
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetSpecularCoeff(glm::vec3(0.7, 0.7, 0.7));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetAmbientCoeff(glm::vec3(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetDiffuseCoeff(glm::vec3(0.6, 0.6, 0.6));
+	shared_ptr<Material> refractShader = make_shared<RefractionShader>(1.51, glm::vec3(1.0, 1.0, 1.0));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
@@ -52,6 +50,7 @@ bool Application::loadTestState() {
 		glm::vec3(3.0, 2.0, -4.0),
 		glm::vec3(3.5, 5.0, -4.0),
 		shader1)));
+	//world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, 4.0, 1.0, refractShader)));
 	//world.AddSurface(shared_ptr<Surface>(new Model("./teapot.fbx", shader2)));
 
 	shared_ptr<Light> light = shared_ptr<Light>(new Light{ glm::vec3(-1.5, 0.0, 4.2), glm::vec3(0.4, 0.4, 0.4) });

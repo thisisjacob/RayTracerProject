@@ -50,8 +50,8 @@ BoundingBox Sphere::boundingBox() const {
 	return BoundingBox(min, max);
 }
 
-glm::vec3 Sphere::Color(HitData& hitData, WorldState& world) {
-	return mat.get()->Shading(hitData, world);
+glm::vec3 Sphere::Color(HitData& hitData, WorldState& world, int currRecurrDepth) {
+	return mat.get()->Shading(hitData, world, currRecurrDepth);
 }
 
 glm::vec3 Sphere::GetIntersectionPoint(HitData& hitData) {
