@@ -44,6 +44,9 @@ glm::vec3 IdealSpecular::Shading(HitData& hitData, WorldState& world, int currRe
 	if (reflectedHit.IsHit) {
 		lightCalc += specularCoeff * reflectedHit.HitSurface->Color(reflectedHit, world, ++currRecurDepth);
 	}
+	else {
+		lightCalc += specularCoeff * world.getBackgroundColor();
+	}
 	return clampVec3Color(lightCalc);
 }
 

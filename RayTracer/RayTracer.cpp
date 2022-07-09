@@ -101,5 +101,5 @@ glm::vec3 RayTracer::getColor(const Ray& ray, const int maxDepth, int currDepth)
 		return hitData.HitSurface->Color(hitData, world);
 	}
 	// Return default color
-	else { return glm::vec3(0.207, 0.318, 0.361); }
+	else { return world.getBackgroundColor(); }
 }
