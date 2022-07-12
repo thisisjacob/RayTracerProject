@@ -12,5 +12,10 @@ public:
 	// Calculates refraction
 	// If there is total internal reflection, then false is returned and no changes are made
 	// Otherwise, true is returned, and the value of t is stored in the passed reference t
-	glm::vec3 refract(const glm::vec3& d, const glm::vec3& n, float exteriorIndex, float interiorIndex);
+	glm::vec3 refract(glm::vec3 d, glm::vec3 n, float exteriorIndex, float interiorIndex);
+	// Calculates the reflectance percentage using the traditional Fresnel formula
+	float reflectanceFresnel(glm::vec3 d, glm::vec3 n, float exteriorIndex, float interiorIndex);
+	// Calculates the reflectance percentage using the Schlick approximation
+	// Faster, with minor decreases in accuracy. Should typically be used over the Fresnel version
+	float reflectanceSchlick(glm::vec3 d, glm::vec3 n, float exteriorIndex, float interiorIndex);
 };

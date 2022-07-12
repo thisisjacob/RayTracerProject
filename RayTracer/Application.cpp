@@ -42,10 +42,10 @@ bool Application::loadTestState() {
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetSpecularCoeff(glm::vec3(0.7, 0.7, 0.7));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetAmbientCoeff(glm::vec3(0.0, 0.0, 0.0));
 	dynamic_pointer_cast<IdealSpecular>(mirrorShader)->SetDiffuseCoeff(glm::vec3(0.6, 0.6, 0.6));
-	shared_ptr<Material> refractShader = make_shared<RefractionShader>(1.1);
-	//world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, 0.0, -1.0, 1.0, shader1)));
-	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.5, 0.0, 2.0, 1.0, shader2)));
-	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, -1.0, 1.0, shader3)));
+	shared_ptr<Material> refractShader = make_shared<RefractionShader>(1.5);
+	world.AddSurface(shared_ptr<Surface>(new Sphere(0.2, 0.0, -1.0, 0.3, shader1)));
+	world.AddSurface(shared_ptr<Surface>(new Sphere(-2.0, 0.0, 5.0, 1.0, shader2)));
+	world.AddSurface(shared_ptr<Surface>(new Sphere(2.5, 0.0, 5.0, 1.0, shader3)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(0.0, -10.0, 0.0, 9, mirrorShader)));
 	world.AddSurface(shared_ptr<Surface>(new Sphere(4.0, 1.0, 0.0, 1.0, mirrorShader)));
 	world.AddSurface(shared_ptr<Surface>(new Triangle(glm::vec3(-3.0, 2.0, -5.0),
