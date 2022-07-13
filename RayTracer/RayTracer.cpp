@@ -11,22 +11,10 @@ RayTracer::RayTracer() {
 // Calculates a single pixel of the raytraced image, storing the result in the image data
 void RayTracer::calculatePixel(int xPixel, int yPixel) {
 	const Camera& cam = world.GetCamera();
-	//Ray ray = Ray(cam.getEye(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
-	//Ray ray = Ray(cam.getEye(), cam.getDir(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), -cam.GetFocalLength());
 	Ray ray = Ray(cam.getEye(), cam.getDir(), cam.GetUValue(xPixel), cam.GetVValue(yPixel), cam.GetFocalLength());
 	HitData hitData = world.GetIntersection(ray);
 
-	// Writing color data to file
-	if (hitData.IsHit) {
-		// Found closest object, determine shading and send to file
-		glm::vec3 color = hitData.HitSurface->Color(hitData, world);
-		//std::cout << color.x << " " << color.y << " " << color.z << "\n";
-		image.pixels[yPixel * cam.GetImageWidth() + xPixel] = color;
-		//pixels[yPixel * cam.GetImageWidth() + xPixel] = hitData.HitSurface->GetIntersectionPoint(hitData);
-	}
-	else {
-		image.pixels[yPixel * cam.GetImageWidth() + xPixel] = glm::vec3(0.207, 0.318, 0.361);
-	}
+	image.pixels[yPixel * cam.GetImageWidth() + xPixel] = getColor(ray, 5, 0);
 }
 
 // Calculates rows [startYPixel, endYPixel) of the raytraced image, storing the results in the image data
@@ -92,16 +80,26 @@ int RayTracer::getHeight() {
 	return world.GetCamera().GetImageHeight();
 }
 
-// Clears image, resizes it
 bool RayTracer::refreshImage(int newWidth, int newHeight) {
 	this->world.GetCamera().resizeImagePlane(newWidth, newHeight);
 	image.resizePixels(newWidth, newHeight);
 	return true;
 }
 
-// Changes the world used to generate the raytraced image, and resets the image data
 bool RayTracer::setWorld(const WorldState& newWorld) {
 	this->world = newWorld;
 	this->refreshImage(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight());
 	return true;
+}
+
+glm::vec3 RayTracer::getColor(const Ray& ray, const int maxDepth, int currDepth) {
+	// Reached max depth, so end the recursion
+	if (maxDepth == currDepth) { return glm::vec3(0, 0, 0); }
+	HitData hitData = world.GetIntersection(ray);
+	// Return resultant color
+	if (hitData.IsHit) { 
+		return hitData.HitSurface->Color(hitData, world);
+	}
+	// Return default color
+	else { return world.getBackgroundColor(); }
 }

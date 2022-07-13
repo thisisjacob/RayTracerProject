@@ -18,9 +18,10 @@ public:
 	virtual HitData IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record) = 0;
 	// Object for creating a bounding box of the given surface
 	virtual BoundingBox boundingBox() const = 0;
-	// Called after IsHit
 	// Determines the pixel color value at the intersected point described by hitData
-	virtual glm::vec3 Color(HitData& hitData, WorldState& world) = 0;
+	// currRecurrDepth should be incremented when called within another call of the Color function
+	// This argument is used to prevent infinite loops during reflection and refraction
+	virtual glm::vec3 Color(HitData& hitData, WorldState& world, int currRecurrDepth = 0) = 0;
 	// Returns the surface normal at the point intersected by hitData
 	virtual glm::vec3 GetSurfaceNormal(HitData& hitData) = 0;
 	// Returns the normalized surface normal at the point intersected by hitData

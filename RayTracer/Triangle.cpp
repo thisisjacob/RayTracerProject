@@ -52,8 +52,8 @@ BoundingBox Triangle::boundingBox() const {
 	return BoundingBox(glm::vec3(xMin, yMin, zMin), glm::vec3(xMax, yMax, zMax));
 }
 
-glm::vec3 Triangle::Color(HitData& hitData, WorldState& world) {
-	return mat->Shading(hitData, world);
+glm::vec3 Triangle::Color(HitData& hitData, WorldState& world, int currRecurrDepth) {
+	return mat->Shading(hitData, world, currRecurrDepth);
 }
 
 glm::vec3 Triangle::GetSurfaceNormal(HitData& hitData) {

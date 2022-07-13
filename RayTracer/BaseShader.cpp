@@ -10,7 +10,11 @@ BlinnPhong::BlinnPhong() {
 	matType = MaterialType::BASIC;
 }
 
-glm::vec3 BlinnPhong::Shading(HitData& hitData, WorldState& world) {
+glm::vec3 BlinnPhong::Shading(HitData& hitData, WorldState& world, int currRecurDepth) {
+	// Recursion depth limit reached
+	if (recursionLimitHit(currRecurDepth)) { 
+		return glm::vec3(0.0, 0.0, 0.0); 
+	}
 	glm::vec3 unitNormal = hitData.HitSurface.get()->GetUnitSurfaceNormal(hitData);
 	glm::vec3 surfacePoint = hitData.HitSurface.get()->GetIntersectionPoint(hitData);
 	glm::vec3 lightCalc = glm::vec3(0.0);
@@ -43,8 +47,7 @@ glm::vec3 BlinnPhong::Shading(HitData& hitData, WorldState& world) {
 			lightCalc += specularCoeff * intensity * (float)std::pow(std::max(0.0f, glm::dot(unitNormal, h)), phongExponent);
 		}
 	}
-
-	return glm::vec3(Clamp(lightCalc.x, 0.0f, 1.0f), Clamp(lightCalc.y, 0.0f, 1.0f), Clamp(lightCalc.z, 0.0f, 1.0f));
+	return clampVec3Color(lightCalc);
 }
 
 bool BlinnPhong::SetAmbientCoeff(glm::vec3 newAmbient) {

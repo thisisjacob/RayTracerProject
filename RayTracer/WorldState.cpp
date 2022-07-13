@@ -31,13 +31,22 @@ Camera WorldState::GetCamera() const {
 }
 
 HitData WorldState::GetIntersection(Ray ray) {
+	return GetIntersection(ray, 0.0);
+}
+
+HitData WorldState::GetIntersection(Ray ray, const std::shared_ptr<Surface>& ignoredSurface) {
+	return GetIntersection(ray, 0.0, ignoredSurface);
+}
+
+HitData WorldState::GetIntersection(Ray ray, float t0, const std::shared_ptr<Surface>& ignoredSurface) {
 	HitData hitData;
 	hitData.IsHit = false;
 	hitData.T = std::numeric_limits<float>::infinity();
 	hitData.IntersectingRay = ray;
-	// Find hit surfaces for current ray
 	for (const auto& s : surfaces) {
-		hitData = s->IsHit(s, ray, 0, hitData.T, hitData);
+		if (s != ignoredSurface) {
+			hitData = s->IsHit(s, ray, t0, hitData.T, hitData);
+		}
 	}
 	return hitData;
 }
@@ -52,4 +61,22 @@ HitData WorldState::GetIntersection(Ray ray, float t0) {
 		hitData = s->IsHit(s, ray, t0, hitData.T, hitData);
 	}
 	return hitData;
+}
+
+int WorldState::getRefractiveIndex() const {
+	return globalRefractiveIndex;
+}
+
+glm::vec3 WorldState::getBackgroundColor() const {
+	return backgroundColor;
+}
+
+bool WorldState::setRefractiveIndex(float refractiveIndex) {
+	globalRefractiveIndex = refractiveIndex;
+	return true;
+}
+
+bool WorldState::setBackgroundColor(glm::vec3 backgroundColor) {
+	this->backgroundColor = backgroundColor;
+	return true;
 }

@@ -11,6 +11,8 @@
 #include "Camera.h"
 #include <thread>
 #include "RTImage.h"
+#include "RayFunctions.h"
+#include "MathFunctions.h"
 
 // Generates the raytraced image
 class RayTracer {
@@ -37,4 +39,6 @@ public:
 	bool refreshImage(int newWidth, int newHeight);
 	// Updates the world state used by the ray tracer, resets the image
 	bool setWorld(const WorldState& newWorld);
+	// Gets the pixel color for the passed ray
+	glm::vec3 getColor(const Ray& ray, const int maxDepth, int currDepth);
 };

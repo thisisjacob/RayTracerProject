@@ -20,7 +20,7 @@ public:
 	bool addMesh(Mesh& mesh);
 	HitData IsHit(const std::shared_ptr<Surface>& callingSurface, Ray ray, float t0, float t1, const HitData& record);
 	BoundingBox boundingBox() const;
-	glm::vec3 Color(HitData& hitData, WorldState& world);
+	glm::vec3 Color(HitData& hitData, WorldState& world, int currRecurrDepth = 0);
 	glm::vec3 GetSurfaceNormal(HitData& hitData);
 	glm::vec3 GetUnitSurfaceNormal(HitData& hitData);
 	glm::vec3 GetIntersectionPoint(HitData& hitData);

@@ -27,8 +27,8 @@ BoundingBox Model::boundingBox() const {
 	return BoundingBox(glm::vec3(), glm::vec3());
 }
 
-glm::vec3 Model::Color(HitData& record, WorldState& world) {
-	return mat->Shading(record, world);
+glm::vec3 Model::Color(HitData& record, WorldState& world, int currRecurrDepth) {
+	return mat->Shading(record, world, currRecurrDepth);
 }
 
 glm::vec3 Model::GetSurfaceNormal(HitData& record) {
