@@ -32,8 +32,16 @@ glm::vec3 Camera::getEye() const {
 	return eye;
 }
 
+void Camera::setEye(glm::vec3 eye) {
+	this->eye = eye;
+}
+
 glm::vec3 Camera::getDir() const {
 	return dir;
+}
+
+void Camera::setDir(glm::vec3 dir) {
+	this->dir = dir;
 }
 
 int  Camera::GetImageWidth() const {

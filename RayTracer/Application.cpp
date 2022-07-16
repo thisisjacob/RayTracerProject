@@ -65,10 +65,6 @@ bool Application::loadTestState() {
 
 void Application::startApplication() {
 	rt.setWorld(world);
-	MainInterface interface(rt.image.getWidth(), rt.image.getHeight());
-	// Thread render so it runs alongside user interface
-	std::thread rtThread(&RayTracer::Render, &rt);
-	// TODO: Crashes with 300x300+ sizes when startInterface is uncommented
-	interface.startInterface(rt.image);
-	rtThread.join();
+	MainInterface interface(rt.image.getWidth(), rt.image.getHeight(), rt);
+	interface.startInterface();
 }

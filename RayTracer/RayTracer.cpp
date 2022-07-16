@@ -1,7 +1,6 @@
 #include "RayTracer.h"
 
-RayTracer::RayTracer(WorldState world) : image(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight()) {
-	this->world = world;
+RayTracer::RayTracer(WorldState& world) : image(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight()), world{ world } {
 }
 
 RayTracer::RayTracer() {
@@ -31,8 +30,12 @@ void RayTracer::calculatePixel(int xPixel, int yPixel) {
 
 // Calculates rows [startYPixel, endYPixel) of the raytraced image, storing the results in the image data
 void RayTracer::calculateRows(int startYPixel, int endYPixel) {
+	// Close before rendering row
+	if (!isRendering) { return;  }
 	const Camera& cam = world.GetCamera();
 	for (int y = startYPixel; y < endYPixel; y++) {
+		// Close while rendering row
+		if (!isRendering) { return; }
 		calculateRow(y);
 		std::cout << "Row: " << y << " Complete\n";
 	}
@@ -52,7 +55,12 @@ void RayTracer::calculateColumn(int column) {
 	}
 }
 
+bool RayTracer::rendering() {
+	return isRendering;
+}
+
 bool RayTracer::Render() {
+	isRendering = true;
 	const Camera camera = world.GetCamera();
 	image.erasePixels();
 	int yPos = 0;
@@ -82,6 +90,12 @@ bool RayTracer::Render() {
 	return true;
 }
 
+bool RayTracer::cancelRender() {
+	isRendering = false;
+	image.erasePixels();
+	return true;
+}
+
 const std::vector<glm::vec3>& RayTracer::getPixels() { return image.pixels; }
 
 int RayTracer::getWidth() {
@@ -100,8 +114,12 @@ bool RayTracer::refreshImage(int newWidth, int newHeight) {
 }
 
 // Changes the world used to generate the raytraced image, and resets the image data
-bool RayTracer::setWorld(const WorldState& newWorld) {
+bool RayTracer::setWorld(WorldState& newWorld) {
 	this->world = newWorld;
 	this->refreshImage(world.GetCamera().GetImageWidth(), world.GetCamera().GetImageHeight());
 	return true;
+}
+
+WorldState& RayTracer::getWorld() {
+	return world;
 }

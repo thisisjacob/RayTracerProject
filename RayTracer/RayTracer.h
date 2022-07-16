@@ -26,9 +26,15 @@ private:
 	void calculateColumn(int col);
 public:
 	RTImage image;
-	RayTracer(WorldState world);
+	// Used to tell threads to stop or continue rendering
+	bool isRendering;
+	RayTracer(WorldState& world);
 	RayTracer();
 	bool Render();
+	// Cancels a render
+	bool cancelRender();
+	// Returns true if the raytracer is rendering, false if it is not
+	bool rendering();
 	// Gets the image data
 	const std::vector<glm::vec3>& getPixels();
 	int getWidth();
@@ -36,5 +42,6 @@ public:
 	// Updates the size of the image, resets the image data
 	bool refreshImage(int newWidth, int newHeight);
 	// Updates the world state used by the ray tracer, resets the image
-	bool setWorld(const WorldState& newWorld);
+	bool setWorld(WorldState& newWorld);
+	WorldState& getWorld();
 };

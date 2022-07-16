@@ -19,7 +19,9 @@ public:
 	float GetUValue(int xPixel) const;
 	float GetVValue(int yPixel) const;
 	glm::vec3 getEye() const;
+	void setEye(glm::vec3 eye);
 	glm::vec3 getDir() const;
+	void setDir(glm::vec3 dir);
 	int GetImageWidth() const;
 	int GetImageHeight() const;
 	// Distance of the image plane from the camera position
