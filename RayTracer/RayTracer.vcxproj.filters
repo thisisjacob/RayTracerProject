@@ -39,6 +39,12 @@
     <Filter Include="RayTracer\RayTracerAlgo">
       <UniqueIdentifier>{7d9f7a35-0723-4e81-b00c-e92084dbc5a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RayTracer\WorldDataLoader">
+      <UniqueIdentifier>{f1395c59-0601-4e99-b8f9-008e4f322b41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RayTracer\WorldDataLoader\DataTypes">
+      <UniqueIdentifier>{c22f7e30-01eb-40bf-abcd-ecb579aee714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Start.cpp">
@@ -94,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="MathFunctions.cpp">
       <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldLoader.cpp">
+      <Filter>RayTracer\WorldDataLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +168,15 @@
     </ClInclude>
     <ClInclude Include="RayFunctions.h">
       <Filter>RayTracer\RayTracerAlgo</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldLoader.h">
+      <Filter>RayTracer\WorldDataLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldConfig.h">
+      <Filter>RayTracer\WorldDataLoader\DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraConfig.h">
+      <Filter>RayTracer\WorldDataLoader\DataTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

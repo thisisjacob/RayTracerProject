@@ -1,0 +1,18 @@
+{
+    "test": "hello",
+    "camera": {
+        "imageWidth": 800,
+        "imageHeight": 600,
+        "eyePosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 10.5
+        },
+        "direction": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -1.0
+        },
+        "focalLength": 1.0
+    }
+}

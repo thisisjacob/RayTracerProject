@@ -1,17 +1,14 @@
 #include "Application.h"
 
-Application::Application() : world{}, rt{ } { }
-
-bool Application::loadState(WorldState worldState) {
-	return false;
-}
-
-bool Application::loadState(std::string filePath) {
-	return false;
-}
+Application::Application(WorldConfig& worldData) : worldConfig{ worldData }, world {}, rt{ } { }
 
 bool Application::loadTestState() {
-	world.SetCamera(Camera(800, 600, glm::vec3(0.0, 0.0, 10.5), glm::vec3(0.0, 0.0, -1.0), 1.0));
+	world.SetCamera(Camera(
+		worldConfig.camera.imageWidth,
+		worldConfig.camera.imageHeight, 
+		worldConfig.camera.eyePosition,
+		worldConfig.camera.cameraDirection,
+		worldConfig.camera.focalLength));
 	world.setRefractiveIndex(1.0);
 	world.setBackgroundColor(glm::vec3(0.207, 0.318, 0.361));
 	shared_ptr<Material> shader1 = make_shared<BlinnPhong>();
